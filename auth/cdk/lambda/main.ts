@@ -2,8 +2,7 @@ import {App} from 'cdktf';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
 import {resolve} from 'path';
-import {LambdaStack} from './common';
-import {RedisStack} from './common/stacks/redis.stack';
+import {LambdaStack, MigrationStack, RedisStack} from './common';
 
 dotenv.config();
 dotenvExt.load({
@@ -34,14 +33,15 @@ const getSecurityGroup = () => {
   return [];
 };
 
-new LambdaStack(app, 'migration', {
+new MigrationStack(app, 'migration', {
   // NOSONAR
-  path: resolve(__dirname, '../../migration'),
+  codePath: resolve(__dirname, '../../migration'),
   handler: 'lambda.handler',
   runtime: 'nodejs16.x',
-  version: 'v0.0.1',
-  securityGroupIds: getSecurityGroup(),
-  subnetIds: getSubnetIds(),
+  vpcConfig: {
+    securityGroupIds: getSecurityGroup(),
+    subnetIds: getSubnetIds(),
+  },
   memorySize: 256,
   invocationData: '',
   timeout: 60,
@@ -58,14 +58,14 @@ new LambdaStack(app, 'migration', {
 
 new LambdaStack(app, 'lambda', {
   // NOSONAR
-  path: resolve(__dirname, '../../dist'),
+  codePath: resolve(__dirname, '../../dist'),
   handler: 'lambda.handler',
   runtime: 'nodejs16.x',
-  version: 'v0.0.1',
   layerPath: resolve(__dirname, '../../layers'),
-  isApiRequired: true,
-  securityGroupIds: getSecurityGroup(),
-  subnetIds: getSubnetIds(),
+  vpcConfig: {
+    securityGroupIds: getSecurityGroup(),
+    subnetIds: getSubnetIds(),
+  },
   memorySize: 256,
   timeout: 30,
   envVars: {

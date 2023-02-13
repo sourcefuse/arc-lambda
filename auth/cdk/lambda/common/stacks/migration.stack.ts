@@ -1,15 +1,11 @@
 import * as random from '@cdktf/provider-random';
 import {TerraformStack} from 'cdktf';
 import {Construct} from 'constructs';
-import {ILambdaWithApiGateway, LambdaWithApiGateway} from 'sourceloop-cdktf';
+import {ILambda, Lambda} from 'sourceloop-cdktf';
 import {AwsProvider} from '../constructs/awsProvider';
 
-export class LambdaStack extends TerraformStack {
-  constructor(
-    scope: Construct,
-    id: string,
-    config: Omit<ILambdaWithApiGateway, 'name'>,
-  ) {
+export class MigrationStack extends TerraformStack {
+  constructor(scope: Construct, id: string, config: Omit<ILambda, 'name'>) {
     super(scope, id);
 
     new AwsProvider(this, 'aws'); // NOSONAR
@@ -20,7 +16,7 @@ export class LambdaStack extends TerraformStack {
       length: 2,
     });
 
-    new LambdaWithApiGateway(this, 'lambda-apiGateway', {
+    new Lambda(this, 'lambda', {
       ...config,
       name: pet.id,
     });
