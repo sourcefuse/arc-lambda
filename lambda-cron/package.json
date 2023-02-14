@@ -1,0 +1,30 @@
+{
+  "name": "lambda-cron",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.tsx src ./__tests__/",
+    "lint:fix": "eslint --fix --ext .js,.ts,.tsx src ./__tests__/",
+    "script:build-dependency-layer": "npm install --prod && scripts/build-dependency-layer.sh && npm install;",
+    "build": "tsc && npm run script:build-dependency-layer",
+    "cleanup": "rm -rf dist && rm -rf layers"
+  },
+  "repository": "https://github.com/sourcefuse/arc-lambda",
+  "author": "SourceFuse",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.93",
+    "@types/lambda-log": "^2.2.1",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "lambda-log": "^3.1.0"
+  }
+}
