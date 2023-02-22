@@ -13,6 +13,8 @@
     "node": "12 || 14 || 16 || 17"
   },
   "scripts": {
+    "build:layers": "scripts/build-dependency-layer.sh",
+    "build:migrations": "scripts/build-migrations.sh",
     "build": "npm run clean && lb-tsc",
     "build:watch": "lb-tsc --watch",
     "lint": "npm run eslint && npm run prettier:check",
@@ -62,6 +64,8 @@
     "@sourceloop/core": "^7.3.6",
     "@sourceloop/feature-toggle": "^0.3.14",
     "@sourceloop/feature-toggle-service": "^0.11.5",
+    "@vendia/serverless-express": "^4.10.1",
+    "aws-lambda": "^1.0.7",
     "db-migrate": "^1.0.0-beta.18",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.3",
@@ -76,6 +80,7 @@
     "@loopback/build": "^9.0.5",
     "@loopback/eslint-config": "^13.0.5",
     "@loopback/testlab": "^5.0.5",
+    "@types/aws-lambda": "^8.10.110",
     "@types/node": "^14.18.33",
     "eslint": "^8.28.0",
     "source-map-support": "^0.5.21",

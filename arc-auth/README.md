@@ -67,7 +67,7 @@ npm test
 
 ## Installation
 
-1. Create a postgres database _(checkout README.md in /cdk/db)_
+1. Create a postgres database _(checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/dependencies/db/README.md))_
 2. Provide Redis and Postgres envs
 3. Provide JWT secret and issuer
 
@@ -129,5 +129,5 @@ Compile and build the Typescript Lambda code. Navigate to the root of the repo t
 
 Once you have completed the steps in [Build Step](#build_step), You can deploy your infrastructure.
 
-- For Postgres DB deployement checkout [README.md](https://github.com/sourcefuse/typescript-lambda-boilerplate/blob/main/sourceloop-lambda/authentication-service-lambda/cdk/db/README.md) in /cdk/db
-- For code and migration deployment checkout [README.md](https://github.com/sourcefuse/typescript-lambda-boilerplate/blob/main/sourceloop-lambda/authentication-service-lambda/cdk/lambda/README.md) in /cdk/lambda
+- For Postgres DB deployement checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/dependencies/db/README.md)
+- For code and migration deployment checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/arc-auth/cdk/README.md)

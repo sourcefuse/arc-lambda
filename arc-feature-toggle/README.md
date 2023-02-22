@@ -67,9 +67,53 @@ npm run lint:fix
 npm test
 ```
 
+## Installation
+
+1. Create a postgres database _(checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/dependencies/db/README.md))_
+2. Provide Redis and Postgres envs
+3. Provide JWT secret and issuer
+
+## Environment
+
+- `DB_HOST`: Postgres Database host
+- `DB_PORT`: Postgres port
+- `DB_USER`: Postgres user
+- `DB_PASSWORD`: Postgres password
+- `DB_DATABASE`: Postgres database
+- `DB_SCHEMA`: Postgres schema
+- `JWT_SECRET`: For JWT token
+- `JWT_ISSUER`: For JWT token
+- `PORT`: Application port
+
 ## What's next
 
 Please check out [LoopBack 4 documentation](https://loopback.io/doc/en/lb4/) to
 understand how you can continue to add features to this application.
 
 [![LoopBack](<https://github.com/loopbackio/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
+
+# Service deployment in lambda
+
+## <a id="build_step"></a> Build Step
+
+Compile and build the Typescript Lambda code. Navigate to the root of the repo to run the following commands.
+
+1. Create loopback build:
+   ```shell
+   npm run build
+   ```
+2. create lambda layers build:
+   ```shell
+   npm run build:layers
+   ```
+3. create migrations lambda build:
+   ```shell
+   npm run build:migrations
+   ```
+
+## Terraform to deploy your Lambda
+
+Once you have completed the steps in [Build Step](#build_step), You can deploy your infrastructure.
+
+- For Postgres DB deployement checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/dependencies/db/README.md)
+- For code and migration deployment checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/arc-feature-toggle/cdk/README.md)

@@ -2,7 +2,12 @@ import {App} from 'cdktf';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
 import {resolve} from 'path';
-import {LambdaStack, MigrationStack, RedisStack} from './common';
+import {
+  getSecurityGroup,
+  getSubnetIds,
+  LambdaStack,
+  MigrationStack,
+} from './common';
 
 dotenv.config();
 dotenvExt.load({
@@ -12,26 +17,6 @@ dotenvExt.load({
 });
 
 const app = new App();
-
-const getSubnetIds = () => {
-  try {
-    const subnetIds = process.env?.SUBNET_IDS || '';
-    return JSON.parse(subnetIds);
-  } catch (e) {
-    console.error(e); // NOSONAR
-  }
-  return [];
-};
-
-const getSecurityGroup = () => {
-  try {
-    const securityGroup = process.env?.SECURITY_GROUPS || '';
-    return JSON.parse(securityGroup);
-  } catch (e) {
-    console.error(e); // NOSONAR
-  }
-  return [];
-};
 
 new MigrationStack(app, 'migration', {
   // NOSONAR
@@ -85,12 +70,6 @@ new LambdaStack(app, 'lambda', {
     domainName: process.env.DOMAIN_NAME || '',
     hostedZoneId: process.env.HOSTED_ZONE_ID || '',
   },
-  namespace: process.env.NAMESPACE || '',
-  environment: process.env.ENV || '',
-});
-
-new RedisStack(app, 'redis', {
-  // NOSONAR
   namespace: process.env.NAMESPACE || '',
   environment: process.env.ENV || '',
 });
