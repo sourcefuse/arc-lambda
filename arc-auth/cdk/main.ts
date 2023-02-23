@@ -35,7 +35,7 @@ const getSecurityGroup = () => {
 
 new MigrationStack(app, 'migration', {
   // NOSONAR
-  codePath: resolve(__dirname, '../../migration'),
+  codePath: resolve(__dirname, '../migration'),
   handler: 'lambda.handler',
   runtime: 'nodejs16.x',
   vpcConfig: {
@@ -58,10 +58,10 @@ new MigrationStack(app, 'migration', {
 
 new LambdaStack(app, 'lambda', {
   // NOSONAR
-  codePath: resolve(__dirname, '../../dist'),
+  codePath: resolve(__dirname, '../dist'),
   handler: 'lambda.handler',
   runtime: 'nodejs16.x',
-  layerPath: resolve(__dirname, '../../layers'),
+  layerPath: resolve(__dirname, '../layers'),
   vpcConfig: {
     securityGroupIds: getSecurityGroup(),
     subnetIds: getSubnetIds(),

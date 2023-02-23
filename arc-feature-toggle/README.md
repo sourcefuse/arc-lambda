@@ -1,4 +1,4 @@
-# authentication-service
+# FeatureToggleExample
 
 This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
 [initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
@@ -58,6 +58,8 @@ npm run lint:fix
 
 - `npm run migrate`: Migrate database schemas for models
 - `npm run openapi-spec`: Generate OpenAPI spec into a file
+- `npm run docker:build`: Build a Docker image for this application
+- `npm run docker:run`: Run this application inside a Docker container
 
 ## Tests
 
@@ -78,26 +80,10 @@ npm test
 - `DB_USER`: Postgres user
 - `DB_PASSWORD`: Postgres password
 - `DB_DATABASE`: Postgres database
-- `DB_SCHEMA`: Postgres auth
-- `REDIS_HOST`: Redis host
-- `REDIS_PORT`: Redis port
-- `REDIS_URL`: Redis connection string
-- `REDIS_PASSWORD`: Redis password if set
-- `REDIS_DATABASE`: Redis database if set
+- `DB_SCHEMA`: Postgres schema
 - `JWT_SECRET`: For JWT token
 - `JWT_ISSUER`: For JWT token
-- `AZURE_AUTH_ENABLED`: keep it `true`
-- `AZURE_IDENTITY_METADATA`: this will be standard url `https://login.microsoftonline.com/common/.well-known/openid-configuration`
-- `AZURE_AUTH_CLIENT_ID`: this is client id of application created on azure
-- `AZURE_AUTH_CLIENT_SECRET`: this is secret of same client id
-- `AZURE_AUTH_REDIRECT_URL`: this will be authentication service url like `http://{{AUTHENTICATION_SERVICE_URL}}/auth/azure-oauth-redirect`
-- `AZURE_AUTH_ALLOW_HTTP_REDIRECT`: keep it `true`
-- `AZURE_AUTH_COOKIE_INSTEAD_SESSION`: keep it `true`
-- `AZURE_AUTH_PASS_REQ_CALLBACK`: keep it blank
-- `AZURE_AUTH_VALIDATE_ISSUER`: keep it blank
-- `AZURE_AUTH_COOKIE_KEY`: 32 bit string key for encryption
-- `AZURE_AUTH_COOKIE_IV`: 12 bit string key for encryption
--
+- `PORT`: Application port
 
 ## What's next
 
@@ -130,4 +116,4 @@ Compile and build the Typescript Lambda code. Navigate to the root of the repo t
 Once you have completed the steps in [Build Step](#build_step), You can deploy your infrastructure.
 
 - For Postgres DB deployement checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/dependencies/db/README.md)
-- For code and migration deployment checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/arc-auth/cdk/README.md)
+- For code and migration deployment checkout [README.md](https://github.com/sourcefuse/arc-lambda/blob/main/arc-feature-toggle/cdk/README.md)

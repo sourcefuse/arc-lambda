@@ -3,7 +3,7 @@ import { App, TerraformStack } from 'cdktf';
 import { Construct } from 'constructs';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
-import { DbModule, DbModuleOptions } from './.gen/modules/dbModule';
+import { DbModule, DbModuleConfig } from './.gen/modules/dbModule';
 
 dotenv.config();
 dotenvExt.load({
@@ -13,7 +13,7 @@ dotenvExt.load({
 });
 
 export class DbStack extends TerraformStack {
-  constructor(scope: Construct, name: string, options: DbModuleOptions) {
+  constructor(scope: Construct, name: string, options: DbModuleConfig) {
     super(scope, name);
 
     new aws.provider.AwsProvider(this, 'aws', {// NOSONAR
