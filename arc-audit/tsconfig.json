@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@loopback/build/config/tsconfig.common.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "rootDir": "src",
+    "composite": true
+  },
+  "include": [
+    "src"
+  ],
+  "references": []
+}
