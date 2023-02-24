@@ -1,0 +1,91 @@
+{
+  "name": "@sourceloop/audit-ms-example-lambda",
+  "version": "0.6.4",
+  "description": "Sourceloop Audit service deployed on lambda",
+  "keywords": [
+    "loopback-application",
+    "loopback"
+  ],
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": "14 || 16 || 17 || 18"
+  },
+  "scripts": {
+    "build:layers": "scripts/build-dependency-layer.sh",
+    "build:migrations": "scripts/build-migrations.sh",
+    "build": "lb-tsc",
+    "build:watch": "lb-tsc --watch",
+    "lint": "npm run eslint && npm run prettier:check",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "pretest": "npm run rebuild",
+    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "posttest": "npm run lint",
+    "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "docker:build": "docker build -t authentication-service-lambda .",
+    "docker:run": "docker run -p 3000:3000 -d authentication-service-lambda",
+    "premigrate": "npm run build",
+    "migrate": "node ./dist/migrate",
+    "preopenapi-spec": "npm run build",
+    "openapi-spec": "node ./dist/openapi-spec",
+    "prestart": "npm run rebuild",
+    "start": "node -r source-map-support/register .",
+    "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
+    "rebuild": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Vishwas Yogi <vishwas.yogi@sourcefuse.com>",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "dependencies": {
+    "@loopback/boot": "^5.0.5",
+    "@loopback/context": "^5.0.5",
+    "@loopback/core": "^4.0.5",
+    "@loopback/repository": "^5.1.0",
+    "@loopback/rest": "^12.0.5",
+    "@loopback/rest-explorer": "^5.0.5",
+    "@loopback/service-proxy": "^5.0.5",
+    "@sourceloop/audit-log": "^3.1.2",
+    "@sourceloop/audit-service": "^5.2.14",
+    "@sourceloop/core": "^7.3.6",
+    "@types/aws-lambda": "^8.10.110",
+    "@vendia/serverless-express": "^4.10.1",
+    "ajv": "^8.11.0",
+    "ajv-errors": "^3.0.0",
+    "db-migrate": "^1.0.0-beta.18",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^16.0.3",
+    "dotenv-extended": "^2.9.0",
+    "i18n": "^0.15.1",
+    "loopback-connector-postgresql": "^5.5.0",
+    "loopback4-authentication": "^7.2.1",
+    "loopback4-authorization": "^5.0.9",
+    "loopback4-soft-delete": "^7.0.2",
+    "prom-client": "^14.0.1",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@loopback/build": "^9.0.5",
+    "@loopback/eslint-config": "^13.0.5",
+    "@loopback/testlab": "^5.0.5",
+    "@types/i18n": "^0.13.6",
+    "@types/node": "^14.18.33",
+    "eslint": "^8.28.0",
+    "source-map-support": "^0.5.21",
+    "typescript": "~4.8.4"
+  }
+}
