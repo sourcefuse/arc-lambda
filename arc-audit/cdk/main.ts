@@ -2,7 +2,7 @@ import { App } from "cdktf";
 import * as dotenv from "dotenv";
 import * as dotenvExt from "dotenv-extended";
 import { resolve } from "path";
-import { LambdaStack, MigrationStack, RedisStack } from "./common";
+import { LambdaStack, MigrationStack } from "./common";
 
 dotenv.config();
 dotenvExt.load({
@@ -85,12 +85,6 @@ new LambdaStack(app, "lambda", {
     domainName: process.env.DOMAIN_NAME || "",
     hostedZoneId: process.env.HOSTED_ZONE_ID || "",
   },
-  namespace: process.env.NAMESPACE || "",
-  environment: process.env.ENV || "",
-});
-
-new RedisStack(app, "redis", {
-  // NOSONAR
   namespace: process.env.NAMESPACE || "",
   environment: process.env.ENV || "",
 });
