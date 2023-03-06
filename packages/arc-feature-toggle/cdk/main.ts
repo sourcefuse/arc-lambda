@@ -28,7 +28,7 @@ new MigrationStack(app, 'migration', {
     subnetIds: getSubnetIds(),
   },
   memorySize: 256,
-  invocationData: '',
+  invocationData: '{}',
   timeout: 60,
   envVars: {
     DB_HOST: process.env.DB_HOST || '',
