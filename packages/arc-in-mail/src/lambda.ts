@@ -1,0 +1,28 @@
+import {APIGatewayEvent, APIGatewayProxyEvent, Context} from 'aws-lambda';
+import {InMailExampleApplication} from './application';
+const serverlessExpress = require('@vendia/serverless-express');
+
+export * from './application';
+let serverlessApp: (arg0: APIGatewayProxyEvent, arg1: Context) => any; // NOSONAR
+
+export async function setup(event: APIGatewayEvent, context: Context) {
+  const config = {
+    rest: {
+      openApiSpec: {
+        setServersFromRequest: true,
+      },
+    },
+  };
+  const app = new InMailExampleApplication(config);
+  await app.boot();
+  const requestHandler = app.restServer.requestHandler;
+  serverlessApp = serverlessExpress({app: requestHandler});
+  return serverlessApp(event, context);
+}
+
+export const handler = (event: APIGatewayEvent, context: Context) => {
+  if (serverlessApp) {
+    return serverlessApp(event, context);
+  }
+  return setup(event, context);
+};
