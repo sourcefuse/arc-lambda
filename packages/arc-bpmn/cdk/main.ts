@@ -58,6 +58,7 @@ new MigrationStack(app, "migration", {
 
 new LambdaStack(app, "lambda", {
   // NOSONAR
+  s3Bucket: process.env.S3_BUCKET!,
   codePath: resolve(__dirname, "../dist"),
   handler: "lambda.handler",
   runtime: "nodejs16.x",
@@ -68,6 +69,7 @@ new LambdaStack(app, "lambda", {
   },
   memorySize: 256,
   timeout: 30,
+  s3Bucket: process.env.S3_BUCKET!,
   envVars: {
     DB_HOST: process.env.DB_HOST || "",
     DB_PORT: process.env.DB_PORT || "",
