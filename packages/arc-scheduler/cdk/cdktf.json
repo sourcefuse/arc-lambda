@@ -1,0 +1,17 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "projectId": "fd220d0b-1a27-42df-a9af-94a575c9c04a",
+  "sendCrashReports": "false",
+  "terraformProviders": [],
+  "terraformModules": [
+    {
+      "name": "redis",
+      "source": "cloudposse/elasticache-redis/aws"
+    }
+  ],
+  "context": {
+    "excludeStackIdFromLogicalIds": "true",
+    "allowSepCharsInLogicalIds": "true"
+  }
+}
