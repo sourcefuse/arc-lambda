@@ -16,6 +16,7 @@
     "build:layers": "scripts/build-dependency-layer.sh",
     "build:migrations": "scripts/build-migrations.sh",
     "build": "lb-tsc",
+    "build:all": "npm run build && npm run build:layers && npm run build:migrations",
     "build:watch": "lb-tsc --watch",
     "lint": "npm run eslint && npm run prettier:check",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",

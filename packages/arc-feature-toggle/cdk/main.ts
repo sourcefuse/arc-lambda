@@ -43,6 +43,7 @@ new MigrationStack(app, 'migration', {
 
 new LambdaStack(app, 'lambda', {
   // NOSONAR
+  s3Bucket: process.env.S3_BUCKET!,
   codePath: resolve(__dirname, '../dist'),
   handler: 'lambda.handler',
   runtime: 'nodejs16.x',

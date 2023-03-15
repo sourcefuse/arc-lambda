@@ -28,7 +28,7 @@
     "constructs": "^10.1.250",
     "dotenv": "^16.0.3",
     "dotenv-extended": "^2.9.0",
-    "sourceloop-cdktf": "^0.0.12"
+    "sourceloop-cdktf": "^0.0.16"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
