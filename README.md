@@ -37,3 +37,15 @@ To deploy build single package
 ```
 npx lerna run build:all --scope="service-name"
 ```
+
+## List of supported services
+
+- arc-audit
+- arc-auth
+- arc-bpmn
+- arc-feature-toggle
+- arc-in-mail
+- arc-payment
+- arc-scheduler
+- arc-search
+- arc-user-tenant
