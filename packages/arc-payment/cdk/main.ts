@@ -2,7 +2,12 @@ import {App} from 'cdktf';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
 import {resolve} from 'path';
-import {LambdaStack, MigrationStack} from './common';
+import {
+  getSecurityGroup,
+  getSubnetIds,
+  LambdaStack,
+  MigrationStack,
+} from './common';
 
 dotenv.config();
 dotenvExt.load({
@@ -11,27 +16,9 @@ dotenvExt.load({
   includeProcessEnv: true,
 });
 
+console.log(process.env.S3_BUCKET);
+
 const app = new App();
-
-const getSubnetIds = () => {
-  try {
-    const subnetIds = process.env?.SUBNET_IDS || '';
-    return JSON.parse(subnetIds);
-  } catch (e) {
-    console.error(e); // NOSONAR
-  }
-  return [];
-};
-
-const getSecurityGroup = () => {
-  try {
-    const securityGroup = process.env?.SECURITY_GROUPS || '';
-    return JSON.parse(securityGroup);
-  } catch (e) {
-    console.error(e); // NOSONAR
-  }
-  return [];
-};
 
 new MigrationStack(app, 'migration', {
   // NOSONAR
@@ -77,7 +64,7 @@ new LambdaStack(app, 'lambda', {
     DB_DATABASE: process.env.DB_DATABASE || '',
     DB_SCHEMA: process.env.DB_SCHEMA || '',
     JWT_SECRET: process.env.JWT_SECRET || '',
-    JWT_ISSUER: 'sourcefuce',
+    JWT_ISSUER: 'sourcefuse',
     PORT: '3005',
     LOG_LEVEL: 'info',
     DB_CONNECTOR: 'postgresql',

@@ -76,7 +76,7 @@ new LambdaStack(app, "lambda", {
     DB_DATABASE: process.env.DB_DATABASE || "",
     DB_SCHEMA: process.env.DB_SCHEMA || "",
     JWT_SECRET: process.env.JWT_SECRET || "",
-    JWT_ISSUER: "sourcefuce",
+    JWT_ISSUER: "sourcefuse",
     PORT: "3005",
     LOG_LEVEL: "info",
     DB_CONNECTOR: "postgresql",

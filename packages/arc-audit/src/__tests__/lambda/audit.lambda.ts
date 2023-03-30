@@ -2,8 +2,12 @@ import { expect } from "@loopback/testlab";
 import { describe, it } from "mocha";
 import request from "supertest";
 import * as jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-const BASE_URL = "https://sl-test-audit-lambda.sfrefarch.com";
+dotenv.config({
+  path: __dirname + "/./../../../.env",
+});
+const BASE_URL = process.env.LAMBDA_URL;
 
 const testUser = {
   id: "5e6b1a4b-c946-96f5-7e26-9376e657dc0f",
@@ -26,14 +30,22 @@ const token = jwt.sign(testUser, "test", {
   issuer: "sourcefuse",
 });
 
+describe("Audit App", () => {
+  it("should expose a self hosted server", async () => {
+    await request(BASE_URL)
+      .get("/explorer/")
+      .expect(200)
+      .expect("Content-Type", /text\/html/)
+      .expect(/<title>LoopBack API Explorer/);
+  });
+});
+
 describe("Audit Microservice", () => {
   it("should return status 200 while fetching audit logs and token is passed", async () => {
     const reqData = {};
-    const response = await request(BASE_URL)
+    await request(BASE_URL)
       .get("/audit-logs")
       .set("authorization", `Bearer ${token}`)
       .expect(200);
-
-    console.log(response);
   });
 });

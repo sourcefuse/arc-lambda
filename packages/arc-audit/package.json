@@ -27,7 +27,7 @@
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run rebuild",
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
-    "test:lambda": "npm run pretest && lb-mocha --timeout 1500000 --allow-console-logs dist/__tests__/lambda/**/**.js",
+    "test:lambda": "npm run pretest && lb-mocha --timeout 1500000 --allow-console-logs --reporter spec dist/__tests__/lambda/**/**.js",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "docker:build": "docker build -t authentication-service-lambda .",

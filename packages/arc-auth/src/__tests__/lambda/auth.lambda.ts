@@ -1,4 +1,5 @@
 // /* eslint-disable @typescript-eslint/naming-convention */
+import dotenv from 'dotenv';
 import {expect} from '@loopback/testlab';
 import {AuthenticateErrorKeys} from '@sourceloop/core';
 import {AuthErrorKeys} from 'loopback4-authentication';
@@ -6,7 +7,11 @@ import {describe, it} from 'mocha';
 import request from 'supertest';
 import {TestHelperService} from '../fixtures/services';
 
-const BASE_URL = 'https://sl-auth-v2-test-lambda.sfrefarch.com';
+dotenv.config({
+  path: __dirname + '/./../../../.env',
+});
+const BASE_URL = process.env.LAMBDA_URL;
+console.log(__dirname);
 
 describe('Authentication microservice', () => {
   const useragent = 'test';
