@@ -1,0 +1,33 @@
+---
+name: Test
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - '**'     # matches every branch
+      - '!main'  # excludes main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tflint:
+    runs-on:
+      - self-hosted
+      - refarch
+    name: tflint
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: terraform-linters/setup-tflint@v1
+        with:
+          tflint_version: latest
+
+      - name: Show version
+        run: tflint --version
+
+      - name: Init tflint
+        run: tflint --init
+
+      - name: Run tflint
+        run: tflint -f compact
