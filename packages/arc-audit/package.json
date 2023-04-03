@@ -27,6 +27,7 @@
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run rebuild",
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "test:lambda": "npm run pretest && lb-mocha --timeout 1500000 --allow-console-logs --reporter spec dist/__tests__/lambda/**/**.js",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "docker:build": "docker build -t authentication-service-lambda .",
@@ -84,8 +85,10 @@
     "@loopback/eslint-config": "^13.0.5",
     "@loopback/testlab": "^5.0.5",
     "@types/i18n": "^0.13.6",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^14.18.33",
     "eslint": "^8.28.0",
+    "jsonwebtoken": "^9.0.0",
     "source-map-support": "^0.5.21",
     "typescript": "~4.8.4"
   }

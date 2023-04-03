@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Sourcefuse Technologies
+// Copyright (c) 2022 Sourcefuse Technologies
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
@@ -9,14 +9,15 @@ import {
   HasManyRepositoryFactory,
   HasOneRepositoryFactory,
   juggler,
+  Options,
   repository,
 } from '@loopback/repository';
-import {Options} from '@loopback/repository/src/common-types';
 import {HttpErrors} from '@loopback/rest';
 import {
   AuthDbSourceName,
   OtpRepository,
   Tenant,
+  TenantRepository,
   User,
   UserCredentials,
   UserCredentialsRepository,
@@ -34,7 +35,6 @@ import {
 } from '@sourceloop/core';
 import * as bcrypt from 'bcrypt';
 import {AuthErrorKeys} from 'loopback4-authentication';
-import {TenantRepository} from './tenant.repository';
 
 const saltRounds = 10;
 

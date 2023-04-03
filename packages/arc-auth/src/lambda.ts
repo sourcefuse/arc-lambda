@@ -1,5 +1,5 @@
-import { APIGatewayEvent, APIGatewayProxyEvent, Context } from 'aws-lambda';
-import { AuthenticationServiceApplication } from './application';
+import {APIGatewayEvent, APIGatewayProxyEvent, Context} from 'aws-lambda';
+import {AuthenticationServiceApplication} from './application';
 const serverlessExpress = require('@vendia/serverless-express');
 
 export * from './application';

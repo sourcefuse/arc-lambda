@@ -1,21 +1,24 @@
 // https://cdk.tf/testing
-import { AcmCertificate } from '@cdktf/provider-aws/lib/acm-certificate';
-import { AcmCertificateValidation } from '@cdktf/provider-aws/lib/acm-certificate-validation';
-import { Apigatewayv2Api } from '@cdktf/provider-aws/lib/apigatewayv2-api';
-import { Apigatewayv2ApiMapping } from '@cdktf/provider-aws/lib/apigatewayv2-api-mapping';
-import { Apigatewayv2DomainName } from '@cdktf/provider-aws/lib/apigatewayv2-domain-name';
-import { IamPolicy } from '@cdktf/provider-aws/lib/iam-policy';
-import { IamRole } from '@cdktf/provider-aws/lib/iam-role';
-import { IamRolePolicyAttachment } from '@cdktf/provider-aws/lib/iam-role-policy-attachment';
-import { LambdaFunction } from '@cdktf/provider-aws/lib/lambda-function';
-import { LambdaLayerVersion } from '@cdktf/provider-aws/lib/lambda-layer-version';
-import { LambdaPermission } from '@cdktf/provider-aws/lib/lambda-permission';
-import { Route53Record } from '@cdktf/provider-aws/lib/route53-record';
-import { Pet } from '@cdktf/provider-random/lib/pet';
-import { Testing } from 'cdktf';
+import {AcmCertificate} from '@cdktf/provider-aws/lib/acm-certificate';
+import {AcmCertificateValidation} from '@cdktf/provider-aws/lib/acm-certificate-validation';
+import {Apigatewayv2Api} from '@cdktf/provider-aws/lib/apigatewayv2-api';
+import {Apigatewayv2ApiMapping} from '@cdktf/provider-aws/lib/apigatewayv2-api-mapping';
+import {Apigatewayv2DomainName} from '@cdktf/provider-aws/lib/apigatewayv2-domain-name';
+import {IamPolicy} from '@cdktf/provider-aws/lib/iam-policy';
+import {IamRole} from '@cdktf/provider-aws/lib/iam-role';
+import {IamRolePolicyAttachment} from '@cdktf/provider-aws/lib/iam-role-policy-attachment';
+import {
+  LambdaFunction,
+  LambdaFunctionConfig,
+} from '@cdktf/provider-aws/lib/lambda-function';
+import {LambdaLayerVersion} from '@cdktf/provider-aws/lib/lambda-layer-version';
+import {LambdaPermission} from '@cdktf/provider-aws/lib/lambda-permission';
+import {Route53Record} from '@cdktf/provider-aws/lib/route53-record';
+import {Pet} from '@cdktf/provider-random/lib/pet';
+import {Testing} from 'cdktf';
 import 'cdktf/lib/testing/adapters/jest'; // Load types for expect matchers
-import { LambdaFunctionConfig, LambdaStack } from '../common';
-import { defaultLambdaMemory } from '../common/utils/constants';
+import {LambdaStack} from '../common';
+import {defaultLambdaMemory} from '../common/utils/constants';
 
 expect.addSnapshotSerializer({
   test: val => typeof val === 'string',

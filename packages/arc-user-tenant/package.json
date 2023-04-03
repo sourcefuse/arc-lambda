@@ -29,6 +29,7 @@
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "test:lambda": "npm run pretest && lb-mocha --timeout 1500000 --allow-console-logs --reporter spec dist/__tests__/lambda/**/**.js",
     "docker:build": "docker build -t payment-example-backend .",
     "docker:run": "docker run -p 3000:3000 -d payment-example-backend",
     "premigrate": "npm run build",
@@ -99,6 +100,9 @@
     },
     "cache-manager": {
       "async": "^3.2.3"
+    },
+    "@loopback/rest": {
+      "@openapi-contrib/openapi-schema-to-json-schema": "3.2.0"
     }
   }
 }

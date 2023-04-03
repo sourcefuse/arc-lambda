@@ -1,3 +1,7 @@
+// Copyright (c) 2022 Sourcefuse Technologies
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
@@ -7,30 +11,10 @@ import {
   RestExplorerComponent,
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
-import {
-  BearerVerifierBindings,
-  BearerVerifierComponent,
-  BearerVerifierConfig,
-  BearerVerifierType,
-  CoreComponent,
-  CoreConfig,
-  LocaleKey,
-  SECURITY_SCHEME_SPEC,
-  ServiceSequence,
-  SFCoreBindings,
-} from '@sourceloop/core';
-import * as dotenv from 'dotenv';
-import * as dotenvExt from 'dotenv-extended';
-import {AuthenticationComponent} from 'loopback4-authentication';
-import {
-  AuthorizationBindings,
-  AuthorizationComponent,
-} from 'loopback4-authorization';
-import * as path from 'path';
-
 import {AuthenticationServiceComponent} from '@sourceloop/authentication-service';
-
-import * as openapi from './openapi.json';
+import {CoreConfig, LocaleKey, SFCoreBindings} from '@sourceloop/core';
+import path from 'path';
+import {MySequence} from './sequence';
 
 export {ApplicationConfig};
 
@@ -40,43 +24,7 @@ export class AuthenticationServiceApplication extends BootMixin(
   localeObj: i18nAPI = {} as i18nAPI;
 
   constructor(options: ApplicationConfig = {}) {
-    const port = 3000;
-    dotenv.config();
-    dotenvExt.load({
-      schema: '.env.example',
-      errorOnMissing: process.env.NODE_ENV !== 'test',
-      includeProcessEnv: true,
-    });
-    options.rest = options.rest ?? {};
-    options.rest.basePath = process.env.BASE_PATH ?? '';
-    options.rest.port = +(process.env.PORT ?? port);
-    options.rest.host = process.env.HOST;
-    options.rest.openApiSpec = {
-      endpointMapping: {
-        [`${options.rest.basePath}/openapi.json`]: {
-          version: '3.0.0',
-          format: 'json',
-        },
-      },
-    };
-
     super(options);
-    this.component(CoreComponent);
-
-    // Set up the custom sequence
-    this.sequence(ServiceSequence);
-
-    // this.bind(AuthServiceBindings.Config).to({useCustomSequence: true});
-    // Add authentication component
-    this.component(AuthenticationComponent);
-
-    this.component(AuthenticationServiceComponent);
-
-    // To check if monitoring is enabled from env or not
-    const enableObf = !!+(process.env.ENABLE_OBF ?? 0);
-    // To check if authorization is enabled for swagger stats or not
-    const authentication =
-      process.env.SWAGGER_USER && process.env.SWAGGER_PASSWORD ? true : false;
 
     const configObject: CoreConfig['configObject'] = {
       locales: [
@@ -101,26 +49,10 @@ export class AuthenticationServiceApplication extends BootMixin(
       // sonarignore:end
     };
 
-    this.bind(SFCoreBindings.config).to({
-      enableObf,
-      obfPath: process.env.OBF_PATH ?? '/obf',
-      openapiSpec: openapi,
-      authentication: authentication,
-      swaggerUsername: process.env.SWAGGER_USER,
-      swaggerPassword: process.env.SWAGGER_PASSWORD,
-      configObject,
-    });
+    this.bind(SFCoreBindings.config).to({configObject});
 
-    // Add bearer verifier component
-    this.bind(BearerVerifierBindings.Config).to({
-      type: BearerVerifierType.service,
-    } as BearerVerifierConfig);
-    this.component(BearerVerifierComponent);
-    // Add authorization component
-    this.bind(AuthorizationBindings.CONFIG).to({
-      allowAlwaysPaths: ['/explorer', '/openapi.json'],
-    });
-    this.component(AuthorizationComponent);
+    // Set up the custom sequence
+    this.sequence(MySequence);
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
@@ -129,8 +61,9 @@ export class AuthenticationServiceApplication extends BootMixin(
     this.configure(RestExplorerBindings.COMPONENT).to({
       path: '/explorer',
     });
-
     this.component(RestExplorerComponent);
+
+    this.component(AuthenticationServiceComponent);
 
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
@@ -142,18 +75,5 @@ export class AuthenticationServiceApplication extends BootMixin(
         nested: true,
       },
     };
-
-    this.api({
-      openapi: '3.0.0',
-      info: {
-        title: 'authentication-service',
-        version: '1.0.0',
-      },
-      paths: {},
-      components: {
-        securitySchemes: SECURITY_SCHEME_SPEC,
-      },
-      servers: [{url: '/'}],
-    });
   }
 }

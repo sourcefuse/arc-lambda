@@ -29,6 +29,7 @@
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "test:lambda": "npm run pretest && lb-mocha --timeout 1500000 --allow-console-logs --reporter spec dist/__tests__/lambda/**/**.js",
     "docker:build": "docker build -t in-mail-example .",
     "docker:run": "docker run -p 3000:3000 -d in-mail-example",
     "premigrate": "npm run build",
@@ -82,5 +83,10 @@
     "@types/i18n": "^0.13.6",
     "source-map-support": "^0.5.21",
     "typescript": "~4.8.4"
+  },
+  "overrides": {
+    "@loopback/rest": {
+      "@openapi-contrib/openapi-schema-to-json-schema": "3.2.0"
+    }
   }
 }

@@ -1,15 +1,21 @@
-import { Client } from '@loopback/testlab';
-import { AuthenticationServiceApplication } from '../..';
-import { STATUS_CODE } from '../../enums/status-codes.enum';
-import { setupApplication } from './test-helper';
-
+import * as http from 'http';
+import request from 'supertest';
+import {AuthenticationServiceApplication} from '../..';
+import {STATUS_CODE} from '../../enums/status-codes.enum';
+import {setupApplication} from './test-helper';
 
 describe('HomePage', () => {
   let app: AuthenticationServiceApplication;
-  let client: Client;
+  let server: http.Server;
 
   before('setupApplication', async () => {
-    ({app, client} = await setupApplication());
+    ({app} = await setupApplication());
+    server = http.createServer(
+      (req: http.IncomingMessage, res: http.ServerResponse) => {
+        app.requestHandler(req, res);
+      },
+    );
+    process.argv.forEach(argument => console.log(argument));
   });
 
   after(async () => {
@@ -17,14 +23,14 @@ describe('HomePage', () => {
   });
 
   it('exposes a default home page', async () => {
-    await client
+    await request(server)
       .get('/')
       .expect(STATUS_CODE.OK)
       .expect('Content-Type', /text\/html/);
   });
 
   it('exposes self-hosted explorer', async () => {
-    await client
+    await request(server)
       .get('/explorer/')
       .expect(STATUS_CODE.OK)
       .expect('Content-Type', /text\/html/)

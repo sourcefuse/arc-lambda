@@ -29,6 +29,7 @@
     "test": "echo 'No Tests'",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "test:lambda": "npm run pretest && lb-mocha --timeout 1500000 --allow-console-logs --reporter spec dist/__tests__/lambda/**/**.js",
     "docker:build": "docker build -t workflow-helloworld .",
     "docker:run": "docker run -p 3000:3000 -d workflow-helloworld",
     "premigrate": "npm run build",
