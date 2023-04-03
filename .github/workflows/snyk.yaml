@@ -12,9 +12,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   security:
-    runs-on:
-      - self-hosted
-      - refarch
+    runs-on: ubuntu-latest
     name: snyk
     steps:
       - name: checkout

@@ -18,7 +18,7 @@ jobs:
         with:
           source_file: 'README.md'
           destination_repo: 'sourcefuse/arc-docs'
-          destination_folder: 'docs/arc-iac-docs/modules/arc-backstage-ecs-app'
+          destination_folder: 'docs/arc-iac-docs/modules/arc-lambda'
           user_email: 'github-actions@github.com'
           user_name: ${{ github.actor }}
           commit_message: ${{ github.event.head_commit.message }}
