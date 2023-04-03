@@ -27,6 +27,6 @@ insert into user_tenants
 select (select id from users where username = 'platform.admin@yopmail.com'), (select id from tenants where key = 'master'), 1, id from roles where role_type = 0;
 insert into user_credentials
 (user_id, auth_provider, password)
-select U.id, 'internal', '$2a$10$XPqU6ea3zA0kF4hxMa79X.MOiFlkK5ISA5GxLPxe0r4MXNDi/YAwe' from users U where U.username = 'platform.admin@yopmail.com';
+select U.id, 'internal', '$2a$10$TOLMGK43MjbibS8Jap2RXeHl3.4sJcR3eFbms2dBll2LTMggSK9hG' from users U where U.username = 'platform.admin@yopmail.com';
 
 update users set auth_client_ids = array_cat(auth_client_ids, ARRAY[(select id from auth_clients where client_id = 'webapp')::integer]);
