@@ -7,7 +7,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/dist/index.js",
+      "program": "${workspaceFolder}/dist/index.js"
     },
     {
       "type": "node",
