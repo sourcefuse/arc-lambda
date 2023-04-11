@@ -73,7 +73,7 @@ export class WorkflowHelloworldApplication extends BootMixin(
     this.component(WorkflowServiceComponent);
 
     this.bind(WorkflowServiceBindings.WorkflowManager).toProvider(BpmnProvider);
-    this.registerWorkers().catch((err) => {
+    this.registerWorkers().catch(err => {
       throw new Error("Error while registering workers.");
     });
 

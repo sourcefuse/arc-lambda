@@ -7,7 +7,7 @@ exports.handler = (event, context, callback) => {
     });
     dbMigrate.up();
   } catch (error) {
-    console.error(error);
+    console.error(error);// NOSONAR
     callback(null, {
       message: error?.message || "something went wrong",
     });

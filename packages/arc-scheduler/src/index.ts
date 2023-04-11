@@ -2,7 +2,7 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { ApplicationConfig, SchedulerExampleApplication } from "./application";
+import {ApplicationConfig, SchedulerExampleApplication} from "./application";
 
 export * from "./application";
 
@@ -37,8 +37,8 @@ if (require.main === module) {
       },
     },
   };
-  main(config).catch((err) => {
-    console.error("Cannot start the application.", err);
+  main(config).catch(err => {
+    console.error("Cannot start the application.", err);// NOSONAR
     process.exit(1);
   });
 }
