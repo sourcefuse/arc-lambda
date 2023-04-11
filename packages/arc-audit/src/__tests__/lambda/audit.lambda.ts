@@ -1,3 +1,4 @@
+import { STATUS_CODE } from "@sourceloop/core";
 import dotenv from "dotenv";
 import * as jwt from "jsonwebtoken";
 import { describe, it } from "mocha";
@@ -8,7 +9,6 @@ dotenv.config({
 });
 const BASE_URL = process.env.LAMBDA_URL;
 
-const okResponseCode = 200;
 const testUser = {
   id: "5e6b1a4b-c946-96f5-7e26-9376e657dc0f",
   username: "platform.admin@yopmail.com",
@@ -34,7 +34,7 @@ describe("Audit App", () => {
   it("should expose a self hosted server", async () => {
     await request(BASE_URL)
       .get("/explorer/")
-      .expect(okResponseCode)
+      .expect(STATUS_CODE.OK)
       .expect("Content-Type", /text\/html/)
       .expect(/<title>LoopBack API Explorer/);
   });
@@ -46,6 +46,6 @@ describe("Audit Microservice", () => {
     await request(BASE_URL)
       .get("/audit-logs")
       .set("authorization", `Bearer ${token}`)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
   });
 });

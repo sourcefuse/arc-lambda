@@ -2,9 +2,9 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import {ApplicationConfig, SchedulerExampleApplication} from './application';
+import { ApplicationConfig, SchedulerExampleApplication } from "./application";
 
-export * from './application';
+export * from "./application";
 
 const port = 3000;
 export async function main(options: ApplicationConfig = {}) {
@@ -13,8 +13,8 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start();
 
   const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  console.log(`Try ${url}/ping`);
+  console.log(`Server is running at ${url}`); // NOSONAR
+  console.log(`Try ${url}/ping`); // NOSONAR
 
   return app;
 }
@@ -37,8 +37,8 @@ if (require.main === module) {
       },
     },
   };
-  main(config).catch(err => {
-    console.error('Cannot start the application.', err);
+  main(config).catch((err) => {
+    console.error("Cannot start the application.", err);
     process.exit(1);
   });
 }

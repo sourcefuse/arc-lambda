@@ -1,5 +1,6 @@
 // /* eslint-disable @typescript-eslint/naming-convention */
 import {expect} from '@loopback/testlab';
+import {STATUS_CODE} from '@sourceloop/core';
 import dotenv from 'dotenv';
 import {AuthErrorKeys} from 'loopback4-authentication';
 import {describe, it} from 'mocha';
@@ -9,9 +10,7 @@ dotenv.config({
   path: __dirname + '/./../../../.env',
 });
 const BASE_URL = process.env.LAMBDA_URL;
-console.log(__dirname);
 
-const okResponseCode = 200;
 describe('Authentication microservice', () => {
   const useragent = 'test';
   const deviceId = 'test';
@@ -23,7 +22,7 @@ describe('Authentication microservice', () => {
     const response = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(422);
+      .expect(STATUS_CODE.UNPROCESSED_ENTITY);
     expect(response).to.have.property('error');
   });
   it('should give status 422 for login request with no user credentials', async () => {
@@ -34,7 +33,7 @@ describe('Authentication microservice', () => {
     const response = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(422);
+      .expect(STATUS_CODE.UNPROCESSED_ENTITY);
     expect(response).to.have.property('error');
   });
   it('should give status 401 for login request with wrong client credentials', async () => {
@@ -48,7 +47,7 @@ describe('Authentication microservice', () => {
     const response = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(401);
+      .expect(STATUS_CODE.UNAUTHORISED);
     expect(response).to.have.property('error');
   });
   it('should give status 401 for login request with wrong user credentials', async () => {
@@ -62,7 +61,7 @@ describe('Authentication microservice', () => {
     const response = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(401);
+      .expect(STATUS_CODE.UNAUTHORISED);
     expect(response).to.have.property('error');
   });
   it('should give status 200 for login request', async () => {
@@ -77,7 +76,7 @@ describe('Authentication microservice', () => {
     await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
   });
 
   it('should return code in response', async () => {
@@ -92,7 +91,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     expect(reqForCode.body).to.have.property('code');
   });
 
@@ -109,7 +108,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const response = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -138,7 +137,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -167,7 +166,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(401);
+      .expect(STATUS_CODE.UNAUTHORISED);
 
     expect(reqForCode.body.error.message.message).to.equal(
       AuthErrorKeys.InvalidCredentials,
@@ -187,7 +186,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const reqForToken = await request(BASE_URL).post(`/auth/token`).send({
       clientId: 'webapp',
       code: reqForCode.body.code,
@@ -200,7 +199,7 @@ describe('Authentication microservice', () => {
         password: 'new_test123!@#',
         refreshToken: reqForToken.body.refreshToken,
       })
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
   });
 
   it('should return refresh token and access token for token refresh request with new password', async () => {
@@ -216,7 +215,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -245,7 +244,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const reqForToken = await request(BASE_URL).post(`/auth/token`).send({
       clientId: 'webapp',
       code: reqForCode.body.code,
@@ -258,7 +257,7 @@ describe('Authentication microservice', () => {
         password: 'test123!@#',
         refreshToken: reqForToken.body.refreshToken,
       })
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
   });
 
   it('should return 401 for token refresh request when Authentication token invalid', async () => {
@@ -274,7 +273,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -287,7 +286,7 @@ describe('Authentication microservice', () => {
       .post(`/auth/token-refresh`)
       .send({refreshToken: reqForToken.body.refreshToken})
       .set('Authorization', 'Bearer abc')
-      .expect(401);
+      .expect(STATUS_CODE.UNAUTHORISED);
   });
   it('should return 401 for token refresh request when Authentication token missing', async () => {
     const reqData = {
@@ -302,7 +301,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(okResponseCode);
+      .expect(STATUS_CODE.OK);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -314,6 +313,6 @@ describe('Authentication microservice', () => {
     await request(BASE_URL)
       .post(`/auth/token-refresh`)
       .send({refreshToken: reqForToken.body.refreshToken})
-      .expect(401);
+      .expect(STATUS_CODE.UNAUTHORISED);
   });
 });

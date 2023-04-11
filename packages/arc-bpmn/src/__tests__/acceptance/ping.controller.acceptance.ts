@@ -3,10 +3,10 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import { Client, expect } from "@loopback/testlab";
+import { STATUS_CODE } from "@sourceloop/core";
 import { WorkflowHelloworldApplication } from "../..";
 import { setupApplication } from "./test-helper";
 
-const okResponseCode = 200;
 describe("PingController", () => {
   let app: WorkflowHelloworldApplication;
   let client: Client;
@@ -20,7 +20,7 @@ describe("PingController", () => {
   });
 
   it("invokes GET /ping", async () => {
-    const res = await client.get("/ping?msg=world").expect(okResponseCode);
+    const res = await client.get("/ping?msg=world").expect(STATUS_CODE.OK);
     expect(res.body).to.containEql({ greeting: "Hello from LoopBack" });
   });
 });

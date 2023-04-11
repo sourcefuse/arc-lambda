@@ -16,8 +16,6 @@ dotenvExt.load({
   includeProcessEnv: true,
 });
 
-console.log(process.env.S3_BUCKET);
-
 const app = new App();
 
 new MigrationStack(app, 'migration', {

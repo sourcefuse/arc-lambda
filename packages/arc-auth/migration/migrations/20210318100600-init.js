@@ -40,7 +40,7 @@ exports.down = function (db) {
 function receiveData(resolve, reject, filePath) {
   fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
     if (err) return reject(err);
-    console.log('received data: ' + data);
+    console.log('received data: ' + data); // NOSONAR
 
     resolve(data);
   });

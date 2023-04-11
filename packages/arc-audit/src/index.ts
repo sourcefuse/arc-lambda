@@ -2,15 +2,15 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import dotenv from 'dotenv';
-import dotenvExt from 'dotenv-extended';
-import {ApplicationConfig, AuditExampleApplication} from './application';
+import dotenv from "dotenv";
+import dotenvExt from "dotenv-extended";
+import { ApplicationConfig, AuditExampleApplication } from "./application";
 
-export * from './application';
+export * from "./application";
 
 dotenv.config();
 dotenvExt.load({
-  schema: '.env.example',
+  schema: ".env.example",
   errorOnMissing: true,
   includeProcessEnv: true,
 });
@@ -23,8 +23,8 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start();
 
   const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  console.log(`Try ${url}/ping`);
+  console.log(`Server is running at ${url}`); // NOSONAR
+  console.log(`Try ${url}/ping`); // NOSONAR
 
   return app;
 }
@@ -47,8 +47,8 @@ if (require.main === module) {
       },
     },
   };
-  main(config).catch(err => {
-    console.error('Cannot start the application.', err);
+  main(config).catch((err) => {
+    console.error("Cannot start the application.", err);
     process.exit(1);
   });
 }

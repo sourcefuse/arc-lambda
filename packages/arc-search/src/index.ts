@@ -2,9 +2,9 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import {ApplicationConfig, SearchMsExampleApplication} from './application';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
+import {ApplicationConfig, SearchMsExampleApplication} from './application';
 export * from './application';
 
 dotenv.config();
@@ -22,8 +22,8 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start();
 
   const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  console.log(`Try ${url}/ping`);
+  console.log(`Server is running at ${url}`); // NOSONAR
+  console.log(`Try ${url}/ping`); // NOSONAR
 
   return app;
 }

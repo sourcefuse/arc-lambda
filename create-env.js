@@ -28,7 +28,7 @@ directories.forEach((dirPath) => {
     if (files.length > 0) {
       const fileContent = fs.readFileSync(files[0], "utf8");
       fs.writeFileSync(filePath, fileContent);
-      console.log(`.env created in ${dirPath}`);
+      console.log(`.env created in ${dirPath}`); // NOSONAR
     }
   }
 });

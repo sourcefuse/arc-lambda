@@ -15,7 +15,7 @@ describe('HomePage', () => {
         app.requestHandler(req, res);
       },
     );
-    process.argv.forEach(argument => console.log(argument));
+    process.argv.forEach(argument => console.log(argument)); // NOSONAR
   });
 
   after(async () => {

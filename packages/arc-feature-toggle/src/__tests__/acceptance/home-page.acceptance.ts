@@ -3,10 +3,10 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import {Client} from '@loopback/testlab';
+import {STATUS_CODE} from '@sourceloop/core';
 import {FeatureToggleExampleApplication} from '../..';
 import {setupApplication} from './test-helper';
 
-const okResponseCode = 200;
 describe('HomePage', () => {
   let app: FeatureToggleExampleApplication;
   let client: Client;
@@ -22,14 +22,14 @@ describe('HomePage', () => {
   it('exposes a default home page', async () => {
     await client
       .get('/')
-      .expect(okResponseCode)
+      .expect(STATUS_CODE.OK)
       .expect('Content-Type', /text\/html/);
   });
 
   it('exposes self-hosted explorer', async () => {
     await client
       .get('/explorer/')
-      .expect(okResponseCode)
+      .expect(STATUS_CODE.OK)
       .expect('Content-Type', /text\/html/)
       .expect(/<title>LoopBack API Explorer/);
   });
