@@ -2,26 +2,26 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { BootMixin } from "@loopback/boot";
-import { ApplicationConfig } from "@loopback/core";
-import { RepositoryMixin } from "@loopback/repository";
-import { RestApplication } from "@loopback/rest";
+import {BootMixin} from "@loopback/boot";
+import {ApplicationConfig} from "@loopback/core";
+import {RepositoryMixin} from "@loopback/repository";
+import {RestApplication} from "@loopback/rest";
 import {
   RestExplorerBindings,
   RestExplorerComponent,
 } from "@loopback/rest-explorer";
-import { ServiceMixin } from "@loopback/service-proxy";
+import {ServiceMixin} from "@loopback/service-proxy";
 import {
   BPMTask,
   WorkflowServiceBindings,
   WorkflowServiceComponent,
 } from "@sourceloop/bpmn-service";
-import { CoreConfig, LocaleKey, SFCoreBindings } from "@sourceloop/core";
+import {CoreConfig, LocaleKey, SFCoreBindings} from "@sourceloop/core";
 import path from "path";
-import { SayHelloCommand } from "./commands/sayhello.command";
-import { BpmnProvider } from "./providers/bpmn.provider";
+import {SayHelloCommand} from "./commands/sayhello.command";
+import {BpmnProvider} from "./providers/bpmn.provider";
 
-export { ApplicationConfig };
+export {ApplicationConfig};
 
 export class WorkflowHelloworldApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication))
@@ -48,10 +48,7 @@ export class WorkflowHelloworldApplication extends BootMixin(
       register: this.localeObj,
       directoryPermissions: "777",
       directory: `/tmp`,
-      // sonarignore:start
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      objectNotation: "->" as any,
-      // sonarignore:end
+      objectNotation: true,
     };
 
     this.bind(SFCoreBindings.config).to({ configObject });

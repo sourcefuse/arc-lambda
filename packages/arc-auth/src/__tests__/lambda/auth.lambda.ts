@@ -1,6 +1,6 @@
 // /* eslint-disable @typescript-eslint/naming-convention */
-import dotenv from 'dotenv';
 import {expect} from '@loopback/testlab';
+import dotenv from 'dotenv';
 import {AuthErrorKeys} from 'loopback4-authentication';
 import {describe, it} from 'mocha';
 import request from 'supertest';
@@ -11,6 +11,7 @@ dotenv.config({
 const BASE_URL = process.env.LAMBDA_URL;
 console.log(__dirname);
 
+const okResponseCode = 200;
 describe('Authentication microservice', () => {
   const useragent = 'test';
   const deviceId = 'test';
@@ -73,7 +74,10 @@ describe('Authentication microservice', () => {
       password: 'test123!@#',
     };
     process.env.JWT_ISSUER = 'sourcefuse';
-    await request(BASE_URL).post(`/auth/login`).send(reqData).expect(200);
+    await request(BASE_URL)
+      .post(`/auth/login`)
+      .send(reqData)
+      .expect(okResponseCode);
   });
 
   it('should return code in response', async () => {
@@ -88,7 +92,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     expect(reqForCode.body).to.have.property('code');
   });
 
@@ -105,7 +109,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const response = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -134,7 +138,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -183,7 +187,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const reqForToken = await request(BASE_URL).post(`/auth/token`).send({
       clientId: 'webapp',
       code: reqForCode.body.code,
@@ -196,7 +200,7 @@ describe('Authentication microservice', () => {
         password: 'new_test123!@#',
         refreshToken: reqForToken.body.refreshToken,
       })
-      .expect(200);
+      .expect(okResponseCode);
   });
 
   it('should return refresh token and access token for token refresh request with new password', async () => {
@@ -212,7 +216,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -241,7 +245,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const reqForToken = await request(BASE_URL).post(`/auth/token`).send({
       clientId: 'webapp',
       code: reqForCode.body.code,
@@ -254,7 +258,7 @@ describe('Authentication microservice', () => {
         password: 'test123!@#',
         refreshToken: reqForToken.body.refreshToken,
       })
-      .expect(200);
+      .expect(okResponseCode);
   });
 
   it('should return 401 for token refresh request when Authentication token invalid', async () => {
@@ -270,7 +274,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)
@@ -298,7 +302,7 @@ describe('Authentication microservice', () => {
     const reqForCode = await request(BASE_URL)
       .post(`/auth/login`)
       .send(reqData)
-      .expect(200);
+      .expect(okResponseCode);
     const reqForToken = await request(BASE_URL)
       .post(`/auth/token`)
       .set(deviceIdName, deviceId)

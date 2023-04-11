@@ -6,6 +6,7 @@ import {Client} from '@loopback/testlab';
 import {FeatureToggleExampleApplication} from '../..';
 import {setupApplication} from './test-helper';
 
+const okResponseCode = 200;
 describe('HomePage', () => {
   let app: FeatureToggleExampleApplication;
   let client: Client;
@@ -21,14 +22,14 @@ describe('HomePage', () => {
   it('exposes a default home page', async () => {
     await client
       .get('/')
-      .expect(200)
+      .expect(okResponseCode)
       .expect('Content-Type', /text\/html/);
   });
 
   it('exposes self-hosted explorer', async () => {
     await client
       .get('/explorer/')
-      .expect(200)
+      .expect(okResponseCode)
       .expect('Content-Type', /text\/html/)
       .expect(/<title>LoopBack API Explorer/);
   });

@@ -12,11 +12,11 @@ import {
 } from "@loopback/rest-explorer";
 import { ServiceMixin } from "@loopback/service-proxy";
 import { AuditServiceComponent } from "@sourceloop/audit-service";
-import * as path from "path";
-import { MySequence } from "./sequence";
+import { CoreConfig, LocaleKey, SFCoreBindings } from "@sourceloop/core";
 import * as dotenv from "dotenv";
 import * as dotenvExt from "dotenv-extended";
-import { CoreConfig, LocaleKey, SFCoreBindings } from "@sourceloop/core";
+import * as path from "path";
+import { MySequence } from "./sequence";
 
 export { ApplicationConfig };
 
@@ -66,10 +66,7 @@ export class AuditExampleApplication extends BootMixin(
       register: this.localeObj,
       directoryPermissions: "777",
       directory: `/tmp`,
-      // sonarignore:start
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      objectNotation: "->" as any,
-      // sonarignore:end
+      objectNotation: true,
     };
 
     this.bind(SFCoreBindings.config).to({ configObject });

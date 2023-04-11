@@ -6,6 +6,7 @@ import {Client, expect} from '@loopback/testlab';
 import {FeatureToggleExampleApplication} from '../..';
 import {setupApplication} from './test-helper';
 
+const okResponseCode = 200;
 describe('PingController', () => {
   let app: FeatureToggleExampleApplication;
   let client: Client;
@@ -19,7 +20,7 @@ describe('PingController', () => {
   });
 
   it('invokes GET /ping', async () => {
-    const res = await client.get('/ping?msg=world').expect(200);
+    const res = await client.get('/ping?msg=world').expect(okResponseCode);
     expect(res.body).to.containEql({greeting: 'Hello from LoopBack'});
   });
 });

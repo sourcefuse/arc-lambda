@@ -4,19 +4,19 @@
 // https://opensource.org/licenses/MIT
 import { BootMixin } from "@loopback/boot";
 import { ApplicationConfig } from "@loopback/core";
+import { RepositoryMixin } from "@loopback/repository";
+import { RestApplication } from "@loopback/rest";
 import {
   RestExplorerBindings,
   RestExplorerComponent,
 } from "@loopback/rest-explorer";
-import { RepositoryMixin } from "@loopback/repository";
-import { RestApplication } from "@loopback/rest";
 import { ServiceMixin } from "@loopback/service-proxy";
+import { CoreConfig, LocaleKey, SFCoreBindings } from "@sourceloop/core";
 import { SchedulerServiceComponent } from "@sourceloop/scheduler-service";
 import * as dotenv from "dotenv";
 import * as dotenvExt from "dotenv-extended";
 import path from "path";
 import { MySequence } from "./sequence";
-import { CoreConfig, LocaleKey, SFCoreBindings } from "@sourceloop/core";
 
 export { ApplicationConfig };
 
@@ -63,10 +63,7 @@ export class SchedulerExampleApplication extends BootMixin(
       register: this.localeObj,
       directoryPermissions: "777",
       directory: `/tmp`,
-      // sonarignore:start
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      objectNotation: "->" as any,
-      // sonarignore:end
+      objectNotation: true,
     };
 
     this.bind(SFCoreBindings.config).to({ configObject });

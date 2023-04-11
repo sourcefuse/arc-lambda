@@ -59,10 +59,7 @@ export class UserTenantApplication extends BootMixin(
       register: this.localeObj,
       directoryPermissions: '777',
       directory: `/tmp`,
-      // sonarignore:start
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      objectNotation: '->' as any,
-      // sonarignore:end
+      objectNotation: true,
     };
 
     this.bind(SFCoreBindings.config).to({configObject});
