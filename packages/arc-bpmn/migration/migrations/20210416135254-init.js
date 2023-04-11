@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-var dbm;
-var type;
-var seed;
-var fs = require('fs');
-var path = require('path');
-var Promise;
+let dbm;
+let type;
+let seed;
+let fs = require("fs");
+let path = require("path");
+let prom;
 
 function handleData(resolve, reject, filePath) {
-  fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
+  fs.readFile(filePath, { encoding: "utf-8" }, function (err, data) {
     if (err) return reject(err);
-    console.log('received data: ' + data);
+    console.log("received data: " + data);
 
     resolve(data);
   });
@@ -24,11 +24,11 @@ exports.setup = function (options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
   seed = seedLink;
-  Promise = options.Promise;
+  prom = options.Promise;
 };
 
 exports.up = function (db) {
-  var filePath = path.join(__dirname, 'sqls', '20210416135254-init-up.sql');
+  let filePath = path.join(__dirname, "sqls", "20210416135254-init-up.sql");
   return new Promise(function (resolve, reject) {
     handleData(resolve, reject, filePath);
   }).then(function (data) {
@@ -37,7 +37,7 @@ exports.up = function (db) {
 };
 
 exports.down = function (db) {
-  var filePath = path.join(__dirname, 'sqls', '20210416135254-init-down.sql');
+  let filePath = path.join(__dirname, "sqls", "20210416135254-init-down.sql");
   return new Promise(function (resolve, reject) {
     handleData(resolve, reject, filePath);
   }).then(function (data) {

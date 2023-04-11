@@ -7,7 +7,7 @@ let type;
 let seed;
 const fs = require('fs');
 const path = require('path');
-let Promise;
+let prom;
 
 /**
  * We receive the dbmigrate dependency from dbmigrate initially.
@@ -17,7 +17,7 @@ exports.setup = function (options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
   seed = seedLink;
-  Promise = options.Promise;
+  prom = options.Promise;
 };
 
 exports.up = function (db) {

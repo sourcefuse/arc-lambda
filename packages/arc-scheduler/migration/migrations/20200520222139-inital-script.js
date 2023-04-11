@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 let dbm;
 let type;
 let seed;
-const fs = require('fs');
-const path = require('path');
-let Promise;
+const fs = require("fs");
+const path = require("path");
+let prom;
 
 /**
  * We receive the dbmigrate dependency from dbmigrate initially.
@@ -15,19 +15,19 @@ exports.setup = function (options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
   seed = seedLink;
-  Promise = options.Promise;
+  prom = options.Promise;
 };
 
 exports.up = function (db) {
   const filePath = path.join(
     __dirname,
-    'sqls',
-    '20200520222139-inital-script-up.sql',
+    "sqls",
+    "20200520222139-inital-script-up.sql"
   );
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
+    fs.readFile(filePath, { encoding: "utf-8" }, function (err, data) {
       if (err) return reject(err);
-      console.log('received data: ' + data);
+      console.log("received data: " + data);
 
       resolve(data);
     });
@@ -39,13 +39,13 @@ exports.up = function (db) {
 exports.down = function (db) {
   const filePath = path.join(
     __dirname,
-    'sqls',
-    '20200520222139-inital-script-down.sql',
+    "sqls",
+    "20200520222139-inital-script-down.sql"
   );
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
+    fs.readFile(filePath, { encoding: "utf-8" }, function (err, data) {
       if (err) return reject(err);
-      console.log('received data: ' + data);
+      console.log("received data: " + data);
 
       resolve(data);
     });
