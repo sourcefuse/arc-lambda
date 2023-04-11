@@ -10,6 +10,9 @@ dotenv.config({
   path: __dirname + '/./../../../.env',
 });
 const BASE_URL = process.env.LAMBDA_URL;
+const username = 'platform.admin@yopmail.com';
+const password = 'test123!@#';
+const newPassword = 'new_test123!@#';
 
 describe('Authentication microservice', () => {
   const useragent = 'test';
@@ -69,8 +72,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     await request(BASE_URL)
@@ -84,8 +87,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     const reqForCode = await request(BASE_URL)
@@ -100,8 +103,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -129,8 +132,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -159,7 +162,7 @@ describe('Authentication microservice', () => {
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
       username: 'platform.admin@mail.com',
-      password: 'test123!@#',
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -178,8 +181,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -195,8 +198,8 @@ describe('Authentication microservice', () => {
       .patch(`/auth/change-password`)
       .set('Authorization', `Bearer ${reqForToken.body.accessToken}`)
       .send({
-        username: 'platform.admin@yopmail.com',
-        password: 'new_test123!@#',
+        username,
+        password: newPassword,
         refreshToken: reqForToken.body.refreshToken,
       })
       .expect(STATUS_CODE.OK);
@@ -207,8 +210,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'new_test123!@#',
+      username,
+      password: newPassword,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -236,8 +239,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'new_test123!@#',
+      username,
+      password: newPassword,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -253,8 +256,8 @@ describe('Authentication microservice', () => {
       .patch(`/auth/change-password`)
       .set('Authorization', `Bearer ${reqForToken.body.accessToken}`)
       .send({
-        username: 'platform.admin@yopmail.com',
-        password: 'test123!@#',
+        username,
+        password,
         refreshToken: reqForToken.body.refreshToken,
       })
       .expect(STATUS_CODE.OK);
@@ -265,8 +268,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';
@@ -293,8 +296,8 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       client_secret: 'saqw21!@',
-      username: 'platform.admin@yopmail.com',
-      password: 'test123!@#',
+      username,
+      password,
     };
     process.env.JWT_ISSUER = 'sourcefuse';
     process.env.JWT_SECRET = 'test';

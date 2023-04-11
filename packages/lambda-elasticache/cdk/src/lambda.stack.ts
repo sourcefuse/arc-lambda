@@ -79,7 +79,7 @@ export class LambdaStack extends TerraformStack {
         }
       );
 
-    const lambda = new Lambda(this, "lambda", {
+    const lambda = new Lambda(this, "lambda", {// NOSONAR
       ...config,
       name: pet.id,
     });

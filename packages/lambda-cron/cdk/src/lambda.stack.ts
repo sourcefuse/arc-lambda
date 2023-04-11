@@ -23,7 +23,7 @@ export class LambdaStack extends TerraformStack {
       length: 2,
     });
 
-    new LambdaWithCloudWatchEvent(this, "lambda-cloudwatch", {
+    new LambdaWithCloudWatchEvent(this, "lambda-cloudwatch", {// NOSONAR
       ...config,
       name: pet.id,
     });

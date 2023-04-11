@@ -1,6 +1,7 @@
+import {STATUS_CODE} from '@sourceloop/core';
+import dotenv from 'dotenv';
 import {describe, it} from 'mocha';
 import request from 'supertest';
-import dotenv from 'dotenv';
 
 dotenv.config({
   path: __dirname + '/./../../../.env',
@@ -11,7 +12,7 @@ describe('Feature Toggle App', () => {
   it('should expose a self hosted server', async () => {
     await request(BASE_URL)
       .get('/explorer/')
-      .expect(200)
+      .expect(STATUS_CODE.OK)
       .expect('Content-Type', /text\/html/)
       .expect(/<title>LoopBack API Explorer/);
   });

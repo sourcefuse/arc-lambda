@@ -1,8 +1,8 @@
 import * as random from "@cdktf/provider-random";
-import { TerraformStack } from "cdktf";
-import { Construct } from "constructs";
-import { ILambdaWithApiGateway, LambdaWithApiGateway } from "sourceloop-cdktf";
-import { AwsProvider } from "./awsProvider";
+import {TerraformStack} from "cdktf";
+import {Construct} from "constructs";
+import {ILambdaWithApiGateway, LambdaWithApiGateway} from "sourceloop-cdktf";
+import {AwsProvider} from "./awsProvider";
 
 export class LambdaStack extends TerraformStack {
   constructor(
@@ -20,7 +20,7 @@ export class LambdaStack extends TerraformStack {
       length: 2,
     });
 
-    new LambdaWithApiGateway(this, "lambda-apigateway", {
+    new LambdaWithApiGateway(this, "lambda-apigateway", { // NOSONAR
       ...config,
       name: pet.id,
     });

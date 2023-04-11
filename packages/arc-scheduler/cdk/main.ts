@@ -1,8 +1,8 @@
-import { App } from "cdktf";
+import {App} from "cdktf";
 import * as dotenv from "dotenv";
 import * as dotenvExt from "dotenv-extended";
-import { resolve } from "path";
-import { LambdaStack, MigrationStack } from "./common";
+import {resolve} from "path";
+import {LambdaStack, MigrationStack} from "./common";
 
 dotenv.config();
 dotenvExt.load({
@@ -33,8 +33,7 @@ const getSecurityGroup = () => {
   return [];
 };
 
-new MigrationStack(app, "migration", {
-  // NOSONAR
+new MigrationStack(app, "migration", {// NOSONAR
   codePath: resolve(__dirname, "../migration"),
   handler: "lambda.handler",
   runtime: "nodejs16.x",
@@ -56,8 +55,7 @@ new MigrationStack(app, "migration", {
   environment: process.env.ENV || "",
 });
 
-new LambdaStack(app, "lambda", {
-  // NOSONAR
+new LambdaStack(app, "lambda", {// NOSONAR
   codePath: resolve(__dirname, "../dist"),
   handler: "lambda.handler",
   runtime: "nodejs16.x",

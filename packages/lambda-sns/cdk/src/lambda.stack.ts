@@ -20,7 +20,7 @@ export class LambdaStack extends TerraformStack {
       length: 2,
     });
 
-    new LambdaWithSns(this, "lambda-sns", {
+    new LambdaWithSns(this, "lambda-sns", {// NOSONAR
       ...config,
       name: pet.id,
     });

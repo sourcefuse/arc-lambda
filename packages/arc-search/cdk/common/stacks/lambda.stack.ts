@@ -20,7 +20,7 @@ export class LambdaStack extends TerraformStack {
       length: 2,
     });
 
-    new LambdaWithApiGateway(this, 'lambda-apiGateway', {
+    new LambdaWithApiGateway(this, 'lambda-apiGateway', {// NOSONAR
       ...config,
       name: pet.id,
     });

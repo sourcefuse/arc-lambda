@@ -12,7 +12,7 @@ dotenvExt.load({
 });
 
 const app = new App();
-new LambdaStack(app, "cron", {
+new LambdaStack(app, "cron", { // NOSONAR
   codePath: resolve(__dirname, "../dist"),
   layerPath: resolve(__dirname, "../layers"),
   handler: "cron.handler",

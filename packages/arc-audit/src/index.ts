@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 import dotenv from "dotenv";
 import dotenvExt from "dotenv-extended";
-import { ApplicationConfig, AuditExampleApplication } from "./application";
+import {ApplicationConfig, AuditExampleApplication} from "./application";
 
 export * from "./application";
 
@@ -47,7 +47,7 @@ if (require.main === module) {
       },
     },
   };
-  main(config).catch((err) => {
+  main(config).catch(err => {
     console.error("Cannot start the application.", err);
     process.exit(1);
   });

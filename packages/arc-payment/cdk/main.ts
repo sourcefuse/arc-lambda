@@ -18,8 +18,7 @@ dotenvExt.load({
 
 const app = new App();
 
-new MigrationStack(app, 'migration', {
-  // NOSONAR
+new MigrationStack(app, 'migration', {// NOSONAR
   codePath: resolve(__dirname, '../migration'),
   handler: 'lambda.handler',
   runtime: 'nodejs16.x',
@@ -41,8 +40,7 @@ new MigrationStack(app, 'migration', {
   environment: process.env.ENV || '',
 });
 
-new LambdaStack(app, 'lambda', {
-  // NOSONAR
+new LambdaStack(app, 'lambda', {// NOSONAR
   s3Bucket: process.env.S3_BUCKET!,
   codePath: resolve(__dirname, '../dist'),
   handler: 'lambda.handler',

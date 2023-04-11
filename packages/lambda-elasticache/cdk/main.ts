@@ -12,7 +12,7 @@ dotenvExt.load({
 });
 
 const app = new App();
-new LambdaStack(app, "elasticache", {
+new LambdaStack(app, "elasticache", {// NOSONAR
   codePath: resolve(__dirname, "../dist"),
   layerPath: resolve(__dirname, "../layers"),
   runtime: "nodejs16.x",

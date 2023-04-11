@@ -12,7 +12,7 @@ dotenvExt.load({
 });
 
 const app = new App();
-new LambdaStack(app, "sqs", {
+new LambdaStack(app, "sqs", {// NOSONAR
   codePath: resolve(__dirname, "../dist"),
   layerPath: resolve(__dirname, "../layers"),
   handler: "sqs.handler",
