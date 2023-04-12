@@ -2,7 +2,7 @@ import * as aws from "@cdktf/provider-aws";
 import * as random from "@cdktf/provider-random";
 import { Fn, TerraformIterator, TerraformStack } from "cdktf";
 import { Construct } from "constructs";
-import { ILambda, Lambda } from "sourceloop-cdktf";
+import { ILambda, Lambda } from "arc-cdk";
 import { AwsProvider } from "./awsProvider";
 
 export class LambdaStack extends TerraformStack {

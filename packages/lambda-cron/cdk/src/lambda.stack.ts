@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import {
   ILambdaWithCloudWatchEvent,
   LambdaWithCloudWatchEvent,
-} from "sourceloop-cdktf";
+} from "arc-cdk";
 import { AwsProvider } from "./awsProvider";
 
 export class LambdaStack extends TerraformStack {

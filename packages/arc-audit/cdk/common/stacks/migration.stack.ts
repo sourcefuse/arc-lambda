@@ -1,7 +1,7 @@
 import * as random from "@cdktf/provider-random";
 import {TerraformStack} from "cdktf";
 import {Construct} from "constructs";
-import {ILambda, Lambda} from "sourceloop-cdktf";
+import {ILambda, Lambda} from "arc-cdk";
 import {AwsProvider} from "../constructs/awsProvider";
 
 export class MigrationStack extends TerraformStack {
