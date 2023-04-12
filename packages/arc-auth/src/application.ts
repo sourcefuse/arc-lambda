@@ -13,6 +13,10 @@ import {
 import {ServiceMixin} from '@loopback/service-proxy';
 import {AuthenticationServiceComponent} from '@sourceloop/authentication-service';
 import {CoreConfig, LocaleKey, SFCoreBindings} from '@sourceloop/core';
+import {
+  AuthenticationBindings,
+  AuthenticationConfig,
+} from 'loopback4-authentication';
 import path from 'path';
 import {MySequence} from './sequence';
 
@@ -50,6 +54,10 @@ export class AuthenticationServiceApplication extends BootMixin(
 
     // Set up the custom sequence
     this.sequence(MySequence);
+
+    this.bind(AuthenticationBindings.CONFIG).to({
+      secureClient: true,
+    } as AuthenticationConfig);
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));

@@ -103,7 +103,7 @@ CREATE TABLE main.user_credentials (
 	CONSTRAINT pk_user_permissions_id PRIMARY KEY ( id )
  );
 
-CREATE  TABLE main.user_resources ( 
+CREATE  TABLE main.user_resources (
 	deleted              bool DEFAULT false NOT NULL ,
 	deleted_on           timestamptz   ,
 	deleted_by           uuid   ,
@@ -202,3 +202,5 @@ ALTER TABLE main.user_tenants ADD CONSTRAINT fk_user_tenants_users FOREIGN KEY (
 ALTER TABLE main.user_tenants ADD CONSTRAINT fk_user_tenants_tenants FOREIGN KEY ( tenant_id ) REFERENCES main.tenants( id );
 
 ALTER TABLE main.user_tenants ADD CONSTRAINT fk_user_tenants_roles FOREIGN KEY ( role_id ) REFERENCES main.roles( id );
+
+ALTER TABLE main.auth_clients ADD client_type varchar(100) DEFAULT 'public';
