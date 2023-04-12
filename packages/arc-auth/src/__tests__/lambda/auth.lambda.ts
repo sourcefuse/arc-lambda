@@ -31,7 +31,6 @@ describe('Authentication microservice', () => {
   it('should give status 422 for login request with no user credentials', async () => {
     const reqData = {
       clientId: 'webapp',
-      clientSecret: 'saqw21!@',
     };
     const response = await request(BASE_URL)
       .post(`/auth/login`)
@@ -43,7 +42,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'web1', // eslint-disable-next-line
-      client_secret: 'blah1',
       username: 'someuser',
       password: 'somepassword',
     };
@@ -57,7 +55,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username: 'someuser',
       password: 'somepassword',
     };
@@ -71,7 +68,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
@@ -86,7 +82,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
@@ -102,7 +97,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
@@ -131,7 +125,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
@@ -160,7 +153,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username: 'platform.admin@mail.com',
       password,
     };
@@ -180,7 +172,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
@@ -209,7 +200,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password: newPassword,
     };
@@ -238,7 +228,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password: newPassword,
     };
@@ -267,7 +256,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
@@ -295,7 +283,6 @@ describe('Authentication microservice', () => {
     const reqData = {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
-      client_secret: 'saqw21!@',
       username,
       password,
     };
