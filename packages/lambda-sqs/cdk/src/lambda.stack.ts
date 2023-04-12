@@ -1,7 +1,7 @@
 import * as random from "@cdktf/provider-random";
 import { TerraformStack } from "cdktf";
 import { Construct } from "constructs";
-import { ILambdaWithSqs, LambdaWithSqs } from "sourceloop-cdktf";
+import { ILambdaWithSqs, LambdaWithSqs } from "arc-cdk";
 import { AwsProvider } from "./awsProvider";
 
 export class LambdaStack extends TerraformStack {

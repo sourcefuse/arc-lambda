@@ -1,7 +1,7 @@
 import * as random from '@cdktf/provider-random';
 import {TerraformStack} from 'cdktf';
 import {Construct} from 'constructs';
-import {ILambdaWithApiGateway, LambdaWithApiGateway} from 'sourceloop-cdktf';
+import {ILambdaWithApiGateway, LambdaWithApiGateway} from 'arc-cdk';
 import {AwsProvider} from '../constructs/awsProvider';
 
 export class LambdaStack extends TerraformStack {

@@ -29,7 +29,7 @@
     "constructs": "^10.1.229",
     "dotenv": "^16.0.3",
     "dotenv-extended": "^2.9.0",
-    "sourceloop-cdktf": "^0.0.16"
+    "arc-cdk": "^0.0.3"
   },
   "devDependencies": {
     "@types/jest": "^29.2.6",
