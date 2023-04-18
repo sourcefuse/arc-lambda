@@ -46,7 +46,7 @@
     "docker:build:dev": "DOCKER_BUILDKIT=1 sudo docker build --build-arg NR_ENABLED=$NR_ENABLED_VALUE -t $IMAGE_REPO_NAME/authenticationservice-$npm_package_name:$IMAGE_TAG_VERSION .",
     "docker:push:dev": "sudo docker push $IMAGE_REPO_NAME/authenticationservice-$npm_package_name:$IMAGE_TAG_VERSION",
     "coverage": "nyc npm run test",
-    "db:migrate": "./node_modules/db-migrate/bin/db-migrate up --config './migrations/database.json'",
+    "db:migrate": "../../node_modules/db-migrate/bin/db-migrate up --config './migration/migrations/database.json'",
     "db:migrate:down": "./node_modules/db-migrate/bin/db-migrate down --config './migrations/database.json'",
     "db:migrate:reset": "./node_modules/db-migrate/bin/db-migrate reset --config './migrations/database.json'"
   },
@@ -71,6 +71,7 @@
     "@loopback/rest": "^12.0.1",
     "@loopback/rest-explorer": "^5.0.1",
     "@loopback/service-proxy": "^5.0.1",
+    "@sourceloop/audit-log": "^3.2.2",
     "@sourceloop/authentication-service": "10.0.0",
     "@sourceloop/core": "^7.0.1",
     "@types/aws-lambda": "^8.10.110",
@@ -93,12 +94,12 @@
     "@types/i18n": "^0.13.6",
     "@types/node": "^14.18.21",
     "@types/passport-google-oauth20": "^2.0.11",
+    "db-migrate": "^1.0.0-beta.18",
+    "db-migrate-pg": "^1.2.2",
     "eslint": "^8.17.0",
     "nodemon": "^2.0.15",
     "nyc": "^15.1.0",
     "source-map-support": "^0.5.21",
-    "typescript": "~4.7.3",
-    "db-migrate": "^1.0.0-beta.18",
-    "db-migrate-pg": "^1.2.2"
+    "typescript": "~4.7.3"
   }
 }
