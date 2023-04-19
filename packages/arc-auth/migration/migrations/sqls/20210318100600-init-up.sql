@@ -173,6 +173,20 @@ END;
 $function$
 ;
 
+CREATE TABLE main.audit_logs (
+	id                      uuid DEFAULT md5(random()::text || clock_timestamp()::text)::uuid NOT NULL ,
+	"action"                text NOT NULL,
+	acted_at                timestamptz NOT NULL,
+	acted_on                text NULL,
+	action_key              text NOT NULL,
+	entity_id               text NOT NULL,
+	actor                   text NOT NULL,
+	"before"                text NULL,
+	"after"                 text NULL,
+	action_group            text NULL,
+	CONSTRAINT              audit_logs_pkey PRIMARY KEY (id)
+);
+
 CREATE TRIGGER mdt_auth_clients BEFORE UPDATE ON main.auth_clients FOR EACH ROW EXECUTE PROCEDURE main.moddatetime('modified_on');
 
 CREATE TRIGGER mdt_roles BEFORE UPDATE ON main.roles FOR EACH ROW EXECUTE PROCEDURE main.moddatetime('modified_on');

@@ -2,7 +2,7 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import {Getter, inject} from '@loopback/core';
+import {Getter, inject, Constructor} from '@loopback/core';
 import {
   BelongsToAccessor,
   DataObject,
@@ -13,6 +13,11 @@ import {
   repository,
 } from '@loopback/repository';
 import {HttpErrors} from '@loopback/rest';
+import {
+  AuditLogRepository,
+  AuditRepositoryMixin,
+  IAuditMixinOptions,
+} from '@sourceloop/audit-log';
 import {
   AuthDbSourceName,
   OtpRepository,
@@ -29,20 +34,29 @@ import {
   AuthenticateErrorKeys,
   AuthProvider,
   DefaultSoftCrudRepository,
+  IAuthUserWithPermissions,
   ILogger,
   LOGGER,
   UserStatus,
 } from '@sourceloop/core';
 import * as bcrypt from 'bcrypt';
-import {AuthErrorKeys} from 'loopback4-authentication';
+import {AuthenticationBindings, AuthErrorKeys} from 'loopback4-authentication';
 
 const saltRounds = 10;
 
-export class UserRepository extends DefaultSoftCrudRepository<
+const userAuditOptions: IAuditMixinOptions = {
+  actionKey: 'User_logs',
+};
+
+export class UserRepository extends AuditRepositoryMixin<
   User,
   typeof User.prototype.id,
-  UserRelations
-> {
+  UserRelations,
+  string,
+  Constructor<
+    DefaultSoftCrudRepository<User, typeof User.prototype.id, UserRelations>
+  >
+>(DefaultSoftCrudRepository, userAuditOptions) {
   public readonly credentials: HasOneRepositoryFactory<
     UserCredentials,
     typeof User.prototype.id
@@ -56,9 +70,9 @@ export class UserRepository extends DefaultSoftCrudRepository<
 
   constructor(
     @inject(`datasources.${AuthDbSourceName}`)
-    dataSource: juggler.DataSource,
+    public dataSource: juggler.DataSource,
     @repository.getter(UserCredentialsRepository)
-    getUserCredsRepository: Getter<UserCredentialsRepository>,
+    public getUserCredsRepository: Getter<UserCredentialsRepository>,
     @repository.getter(OtpRepository)
     public getOtpRepository: Getter<OtpRepository>,
     @repository.getter('TenantRepository')
@@ -66,8 +80,12 @@ export class UserRepository extends DefaultSoftCrudRepository<
     @repository.getter('UserTenantRepository')
     protected userTenantRepositoryGetter: Getter<UserTenantRepository>,
     @inject(LOGGER.LOGGER_INJECT) private readonly logger: ILogger,
+    @inject.getter(AuthenticationBindings.CURRENT_USER)
+    public getCurrentUser: Getter<IAuthUserWithPermissions>,
+    @repository.getter('AuditLogRepository')
+    public getAuditLogRepository: Getter<AuditLogRepository>,
   ) {
-    super(User, dataSource);
+    super(User, dataSource, getCurrentUser);
     this.userTenants = this.createHasManyRepositoryFactoryFor(
       'userTenants',
       userTenantRepositoryGetter,
