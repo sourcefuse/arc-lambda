@@ -17,6 +17,7 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "AuditLog model count",
@@ -55,7 +56,12 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
+          "200": {
+            "description": "Return value of AuditLogsController.replaceById",
+            "content": {}
+          },
           "204": {
             "description": "No Content",
             "content": {
@@ -95,7 +101,12 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
+          "200": {
+            "description": "Return value of AuditLogsController.updateById",
+            "content": {}
+          },
           "204": {
             "description": "No Content",
             "content": {
@@ -135,6 +146,7 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "AuditLog model instance",
@@ -176,7 +188,12 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
+          "200": {
+            "description": "Return value of AuditLogsController.deleteById",
+            "content": {}
+          },
           "204": {
             "description": "No Content",
             "content": {
@@ -208,6 +225,7 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "AuditLog model instance",
@@ -237,6 +255,7 @@
         "tags": [
           "AuditLogsController"
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "AuditLog PATCH success count",

@@ -21,7 +21,9 @@ import {authenticate, STRATEGY} from 'loopback4-authentication';
 import {authorize} from 'loopback4-authorization';
 import {AuditLog} from '../models';
 import {AuditLogRepository} from '../repositories';
+import {STATUS_CODE} from '@sourceloop/core';
 
+const base = '/audit-logs';
 export class AuditLogsController {
   constructor(
     @repository(AuditLogRepository)
@@ -30,8 +32,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @post('/audit-logs')
-  @response(200, {
+  @post(base)
+  @response(STATUS_CODE.OK, {
     description: 'AuditLog model instance',
     content: {'application/json': {schema: getModelSchemaRef(AuditLog)}},
   })
@@ -53,8 +55,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @get('/audit-logs/count')
-  @response(200, {
+  @get(`${base}/count`)
+  @response(STATUS_CODE.OK, {
     description: 'AuditLog model count',
     content: {'application/json': {schema: CountSchema}},
   })
@@ -64,8 +66,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @get('/audit-logs')
-  @response(200, {
+  @get(base)
+  @response(STATUS_CODE.OK, {
     description: 'Array of AuditLog model instances',
     content: {
       'application/json': {
@@ -84,8 +86,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @patch('/audit-logs')
-  @response(200, {
+  @patch(base)
+  @response(STATUS_CODE.OK, {
     description: 'AuditLog PATCH success count',
     content: {'application/json': {schema: CountSchema}},
   })
@@ -105,8 +107,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @get('/audit-logs/{id}')
-  @response(200, {
+  @get(`${base}/{id}`)
+  @response(STATUS_CODE.OK, {
     description: 'AuditLog model instance',
     content: {
       'application/json': {
@@ -124,8 +126,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @patch('/audit-logs/{id}')
-  @response(204, {
+  @patch(`${base}/{id}`)
+  @response(STATUS_CODE.NO_CONTENT, {
     description: 'AuditLog PATCH success',
   })
   async updateById(
@@ -144,8 +146,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @put('/audit-logs/{id}')
-  @response(204, {
+  @put(`${base}/{id}`)
+  @response(STATUS_CODE.NO_CONTENT, {
     description: 'AuditLog PUT success',
   })
   async replaceById(
@@ -157,8 +159,8 @@ export class AuditLogsController {
 
   @authenticate(STRATEGY.BEARER)
   @authorize({permissions: ['*']})
-  @del('/audit-logs/{id}')
-  @response(204, {
+  @del(`${base}/{id}`)
+  @response(STATUS_CODE.NO_CONTENT, {
     description: 'AuditLog DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {

@@ -70,9 +70,9 @@ export class UserRepository extends AuditRepositoryMixin<
 
   constructor(
     @inject(`datasources.${AuthDbSourceName}`)
-    dataSource: juggler.DataSource,
+    public dataSource: juggler.DataSource,
     @repository.getter(UserCredentialsRepository)
-    getUserCredsRepository: Getter<UserCredentialsRepository>,
+    public getUserCredsRepository: Getter<UserCredentialsRepository>,
     @repository.getter(OtpRepository)
     public getOtpRepository: Getter<OtpRepository>,
     @repository.getter('TenantRepository')
