@@ -1,33 +1,20 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:16-alpine
+FROM public.ecr.aws/lambda/nodejs:16 AS BUILD_IMAGE
 
-# Set to a non-root built-in user `node`
-USER node
+# Create app directory
+RUN mkdir -p ${LAMBDA_TASK_ROOT}
 
-# Create app directory (with user `node`)
-RUN mkdir -p /home/node/app
-
-WORKDIR /home/node/app
-
-ARG WORKFLOW_MIGRATION_SKIP
-ENV WORKFLOW_MIGRATION_SKIP=$WORKFLOW_MIGRATION_SKIP
-ARG WORKFLOW_MIGRATION_COPY
-ENV WORKFLOW_MIGRATION_COPY=$WORKFLOW_MIGRATION_COPY  
+WORKDIR ${LAMBDA_TASK_ROOT}
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY --chown=node package*.json ./
-COPY --chown=node . .
+COPY package*.json ./
 
-RUN npm install
+RUN npm install --ignore-scripts
 
 # Bundle app source code
+COPY . .
 
+# Build Loopback app
 RUN npm run build
 
-# Bind to all network interfaces so that it can be mapped to the host OS
-ENV HOST=0.0.0.0 PORT=3000
-
-EXPOSE ${PORT}
-CMD [ "node", "." ]
+CMD [ "./dist/main.handler" ]
