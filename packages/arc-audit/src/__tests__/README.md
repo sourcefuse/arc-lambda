@@ -1,3 +1,3 @@
 # Tests
 
-Please place your tests in this folder.
+This directory contains the tests for lambda.

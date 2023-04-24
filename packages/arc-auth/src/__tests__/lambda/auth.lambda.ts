@@ -11,7 +11,7 @@ dotenv.config({
 });
 const BASE_URL = process.env.LAMBDA_URL;
 const username = 'platform.admin@yopmail.com';
-const password = 'test123!@#';
+const password = 'test123!@#'; //NOSONAR
 const newPassword = 'new_test123!@#';
 
 describe('Authentication microservice', () => {
@@ -43,7 +43,7 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'web1', // eslint-disable-next-line
       username: 'someuser',
-      password: 'somepassword',
+      password: 'somepassword', //NOSONAR
     };
     const response = await request(BASE_URL)
       .post(`/auth/login`)
@@ -56,7 +56,7 @@ describe('Authentication microservice', () => {
       // eslint-disable-next-line
       client_id: 'webapp', // eslint-disable-next-line
       username: 'someuser',
-      password: 'somepassword',
+      password: 'somepassword', //NOSONAR
     };
     const response = await request(BASE_URL)
       .post(`/auth/login`)

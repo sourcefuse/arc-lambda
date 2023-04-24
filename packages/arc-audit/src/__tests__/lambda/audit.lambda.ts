@@ -12,7 +12,7 @@ const BASE_URL = process.env.LAMBDA_URL;
 const testUser = {
   id: "5e6b1a4b-c946-96f5-7e26-9376e657dc0f",
   username: "platform.admin@yopmail.com",
-  password: "test123!@#",
+  password: "test123!@#", //NOSONAR
   permissions: [
     "ViewAudit",
     "CreateAudit",
