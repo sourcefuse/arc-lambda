@@ -24,7 +24,7 @@
     "stripInternal": true,
     "target": "ES2018",
     "incremental": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": [
     "**/*.ts"
