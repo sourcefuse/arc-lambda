@@ -1,5 +1,6 @@
 import {Client, expect} from '@loopback/testlab';
 import {NotificationApplication} from '../..';
+import {STATUS_CODE} from '../../enums/status-codes.enum';
 import {setupApplication} from './test-helper';
 
 describe('PingController', () => {
@@ -15,7 +16,7 @@ describe('PingController', () => {
   });
 
   it('invokes GET /ping', async () => {
-    const res = await client.get('/ping?msg=world').expect(200);
+    const res = await client.get('/ping?msg=world').expect(STATUS_CODE.OK);
     expect(res.body).to.containEql({greeting: 'Hello from LoopBack'});
   });
 });
