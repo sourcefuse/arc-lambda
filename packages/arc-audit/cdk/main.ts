@@ -57,7 +57,7 @@ new MigrationStack(app, "migration", {// NOSONAR
 
 new LambdaStack(app, "lambda", {// NOSONAR
   s3Bucket: process.env.S3_BUCKET!,
-  codePath: resolve(__dirname, "../dist"),
+  codePath: __dirname,
   handler: "lambda.handler",
   runtime: "nodejs16.x",
   layerPath: resolve(__dirname, "../layers"),
@@ -86,6 +86,7 @@ new LambdaStack(app, "lambda", {// NOSONAR
   },
   namespace: process.env.NAMESPACE || "",
   environment: process.env.ENV || "",
+  useImage: true,
 });
 
 app.synth();
