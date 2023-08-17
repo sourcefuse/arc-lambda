@@ -32,7 +32,7 @@ expect.addSnapshotSerializer({
 });
 
 const handler = 'lambda.handler';
-const runtime = 'nodejs16.x';
+const runtime = 'nodejs18.x';
 const version = 'v0.0.1';
 const subnetIds = ['subnet-123456'];
 const securityGroupIds = ['sg-123456'];

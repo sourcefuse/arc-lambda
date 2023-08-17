@@ -36,7 +36,7 @@ const getSecurityGroup = () => {
 new MigrationStack(app, 'migration', {// NOSONAR
   codePath: resolve(__dirname, '../migration'),
   handler: 'lambda.handler',
-  runtime: 'nodejs16.x',
+  runtime: 'nodejs18.x',
   vpcConfig: {
     securityGroupIds: getSecurityGroup(),
     subnetIds: getSubnetIds(),
@@ -57,9 +57,9 @@ new MigrationStack(app, 'migration', {// NOSONAR
 
 new LambdaStack(app, 'lambda', {// NOSONAR
   s3Bucket: process.env.S3_BUCKET!,
-  codePath: resolve(__dirname, '../dist'),
+  codePath: __dirname,
   handler: 'lambda.handler',
-  runtime: 'nodejs16.x',
+  runtime: 'nodejs18.x',
   layerPath: resolve(__dirname, '../layers'),
   vpcConfig: {
     securityGroupIds: getSecurityGroup(),
@@ -86,6 +86,7 @@ new LambdaStack(app, 'lambda', {// NOSONAR
   },
   namespace: process.env.NAMESPACE || '',
   environment: process.env.ENV || '',
+  useImage: true,
 });
 
 app.synth();
