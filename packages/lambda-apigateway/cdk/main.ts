@@ -16,7 +16,7 @@ new LambdaStack(app, "api-gateway", { // NOSONAR
   codePath: resolve(__dirname, "../dist"),
   layerPath: resolve(__dirname, "../layers"),
   handler: "api-gateway.handler",
-  runtime: "nodejs16.x",
+  runtime: "nodejs18.x",
   namespace: process.env.NAMESPACE || "",
   environment: process.env.ENV || "",
 });
