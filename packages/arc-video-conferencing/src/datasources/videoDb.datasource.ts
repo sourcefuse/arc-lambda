@@ -24,8 +24,7 @@ const config = {
 @lifeCycleObserver('datasource')
 export class VideoDbDataSource
   extends juggler.DataSource
-  implements LifeCycleObserver
-{
+  implements LifeCycleObserver {
   static dataSourceName = VideoConfDatasource;
 
   static readonly defaultConfig = config;
@@ -34,7 +33,7 @@ export class VideoDbDataSource
     @inject('datasources.config.videoDb', {optional: true})
     dsConfig: object = config,
   ) {
-    if (!!+(process.env.ENABLE_DB_CONNECTION_POOLING ?? 0)) {
+    if (!!+(process.env.ENABLE_DB_CONNECTION_POOLING ?? 0)) { //NOSONAR
       const dbPool = {
         max: +(process.env.DB_MAX_CONNECTIONS ?? DEFAULT_MAX_CONNECTIONS),
         idleTimeoutMillis: +(
