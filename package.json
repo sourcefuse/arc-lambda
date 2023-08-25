@@ -17,13 +17,13 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.4",
-    "@commitlint/config-conventional": "^17.4.4",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^7.0.0",
-    "glob": "^9.3.0",
+    "glob": "^10.3.3",
     "husky": "^8.0.3",
-    "lerna": "^5.5.2"
+    "lerna": "^7.1.5"
   }
 }

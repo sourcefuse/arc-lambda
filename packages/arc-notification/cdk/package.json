@@ -23,11 +23,11 @@
     "node": ">=14.0"
   },
   "dependencies": {
-    "@cdktf/provider-aws": "^12.0.5",
+    "@cdktf/provider-aws": "^12.0.13",
     "@cdktf/provider-random": "^5.0.0",
     "cdktf": "^0.15.0",
-    "constructs": "^10.1.229",
-    "dotenv": "^16.0.3",
+    "constructs": "^10.2.69",
+    "dotenv": "^16.3.1",
     "dotenv-extended": "^2.9.0",
     "arc-cdk": "^0.0.8"
   },

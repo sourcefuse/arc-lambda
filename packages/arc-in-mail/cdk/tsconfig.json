@@ -6,9 +6,7 @@
     "experimentalDecorators": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "lib": [
-      "es2018"
-    ],
+    "lib": ["es2018"],
     "module": "CommonJS",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -23,13 +21,11 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
     "target": "ES2018",
-    "incremental": true
+    "incremental": true,
+    "skipLibCheck": true,
+    "ignoreDeprecations": "5.0",
+    "outDir": "dist",
+    "rootDir": "src"
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "cdktf.out"
-  ]
+  "include": ["src"]
 }

@@ -1,11 +1,11 @@
 'use strict';
 
-let dbm;
-let type;
-let seed;
-let fs = require('fs');
-let path = require('path');
-let prom;
+var dbm;
+var type;
+var seed;
+var fs = require('fs');
+var path = require('path');
+var Promise;
 
 /**
  * We receive the dbmigrate dependency from dbmigrate initially.
@@ -15,11 +15,11 @@ exports.setup = function (options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
   seed = seedLink;
-  prom = options.Promise;
+  Promise = options.Promise;
 };
 
 exports.up = function (db) {
-  let filePath = path.join(
+  var filePath = path.join(
     __dirname,
     'sqls',
     '20220607063927-secret-key-column-up.sql',
@@ -27,7 +27,7 @@ exports.up = function (db) {
   return new Promise(function (resolve, reject) {
     fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
       if (err) return reject(err);
-      console.log('received data: ' + data); // NOSONAR
+      console.log('received data: ' + data);
 
       resolve(data);
     });
@@ -37,7 +37,7 @@ exports.up = function (db) {
 };
 
 exports.down = function (db) {
-  let filePath = path.join(
+  var filePath = path.join(
     __dirname,
     'sqls',
     '20220607063927-secret-key-column-down.sql',
@@ -45,7 +45,7 @@ exports.down = function (db) {
   return new Promise(function (resolve, reject) {
     fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
       if (err) return reject(err);
-      console.log('received data: ' + data); // NOSONAR
+      console.log('received data: ' + data);
 
       resolve(data);
     });

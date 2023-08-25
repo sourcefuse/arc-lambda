@@ -9,8 +9,9 @@ import {
   AuditLogRepository,
   AuditRepositoryMixin,
   IAuditMixinOptions,
+  User,
 } from '@sourceloop/audit-log';
-import {AuthenticationBindings, IAuthUser} from 'loopback4-authentication';
+import {AuthenticationBindings} from 'loopback4-authentication';
 import {PgDataSource} from '../datasources';
 import {ToDo, ToDoWithRelations} from '../models';
 
@@ -30,7 +31,7 @@ export class ToDoRepository extends AuditRepositoryMixin<
   constructor(
     @inject(`datasources.${AuditDbSourceName}`) dataSource: PgDataSource,
     @inject.getter(AuthenticationBindings.CURRENT_USER)
-    public getCurrentUser: Getter<IAuthUser>,
+    public getCurrentUser: Getter<User>,
     @repository.getter('AuditLogRepository')
     public getAuditLogRepository: Getter<AuditLogRepository>,
   ) {
