@@ -1,6 +1,7 @@
 {
   "language": "typescript",
-  "app": "npx ts-node main.ts",
+  "app": "npx ts-node src/main.ts",
+  "codeMakerOutput": "src/.gen",
   "projectId": "4e958cfd-4cd9-44c5-854b-c6b777829eff",
   "sendCrashReports": "false",
   "terraformProviders": [],
