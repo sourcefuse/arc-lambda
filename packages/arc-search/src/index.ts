@@ -47,7 +47,7 @@ if (require.main === module) {
     },
   };
   main(config).catch(err => {
-    console.error('Cannot start the application.', err);// NOSONAR
+    console.error('Cannot start the application.', err); // NOSONAR
     process.exit(1);
   });
 }

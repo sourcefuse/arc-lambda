@@ -3,6 +3,7 @@ import {VideoConferencingApplication} from './application';
 const serverlessExpress = require('@vendia/serverless-express');
 
 export * from './application';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let serverlessApp: (arg0: APIGatewayProxyEvent, arg1: Context) => any; // NOSONAR
 
 export async function setup(event: APIGatewayEvent, context: Context) {

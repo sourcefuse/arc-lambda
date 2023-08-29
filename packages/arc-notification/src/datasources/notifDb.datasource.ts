@@ -24,7 +24,8 @@ const config = {
 @lifeCycleObserver('datasource')
 export class NotifDbDataSource
   extends juggler.DataSource
-  implements LifeCycleObserver {
+  implements LifeCycleObserver
+{
   static dataSourceName = NotifDbSourceName;
 
   static readonly defaultConfig = config;

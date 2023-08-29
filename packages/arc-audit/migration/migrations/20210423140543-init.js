@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 let dbm;
 let type;
 let seed;
-let fs = require("fs");
-let path = require("path");
+let fs = require('fs');
+let path = require('path');
 let prom;
 
 /**
@@ -13,9 +13,9 @@ let prom;
  */
 
 function handleFile(filePath, resolve, reject) {
-  fs.readFile(filePath, { encoding: "utf-8" }, function (err, data) {
+  fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
     if (err) return reject(err);
-    console.log("received data: " + data); // NOSONAR
+    console.log('received data: ' + data); // NOSONAR
 
     resolve(data);
   });
@@ -28,7 +28,7 @@ exports.setup = function (options, seedLink) {
 };
 
 exports.up = function (db) {
-  let filePath = path.join(__dirname, "sqls", "20210423140543-init-up.sql");
+  let filePath = path.join(__dirname, 'sqls', '20210423140543-init-up.sql');
   return new Promise(function (resolve, reject) {
     handleFile(filePath, resolve, reject);
   }).then(function (data) {
@@ -37,7 +37,7 @@ exports.up = function (db) {
 };
 
 exports.down = function (db) {
-  let filePath = path.join(__dirname, "sqls", "20210423140543-init-down.sql");
+  let filePath = path.join(__dirname, 'sqls', '20210423140543-init-down.sql');
   return new Promise(function (resolve, reject) {
     handleFile(filePath, resolve, reject);
   }).then(function (data) {

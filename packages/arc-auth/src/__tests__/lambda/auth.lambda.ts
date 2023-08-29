@@ -32,7 +32,7 @@ describe('Authentication microservice', () => {
   it('should give status 401 for login request with wrong client credentials', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'web1', // eslint-disable-next-line
+      client_id: 'web1',
       username: 'someuser',
       password: 'somepassword', //NOSONAR
     };
@@ -43,7 +43,7 @@ describe('Authentication microservice', () => {
   it('should give status 401 for login request with wrong user credentials', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username: 'someuser',
       password: 'somepassword', //NOSONAR
     };
@@ -54,7 +54,7 @@ describe('Authentication microservice', () => {
   it('should give status 200 for login request', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };
@@ -65,7 +65,7 @@ describe('Authentication microservice', () => {
   it('should return code in response', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };
@@ -77,7 +77,7 @@ describe('Authentication microservice', () => {
   it('should return refresh token, access token, expires in response', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };
@@ -94,7 +94,7 @@ describe('Authentication microservice', () => {
   it('should return refresh token and access token for token refresh request', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };
@@ -111,7 +111,7 @@ describe('Authentication microservice', () => {
   it('should throw error when login for external user', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username: 'platform.admin@mail.com',
       password,
     };
@@ -126,7 +126,7 @@ describe('Authentication microservice', () => {
   it('should change password successfully for internal user', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };
@@ -146,7 +146,7 @@ describe('Authentication microservice', () => {
   it('should return refresh token and access token for token refresh request with new password', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password: newPassword,
     };
@@ -163,7 +163,7 @@ describe('Authentication microservice', () => {
   it('should revert to previous password successfully for internal user', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password: newPassword,
     };
@@ -182,7 +182,7 @@ describe('Authentication microservice', () => {
   it('should return 401 for token refresh request when Authentication token invalid', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };
@@ -199,7 +199,7 @@ describe('Authentication microservice', () => {
   it('should return 401 for token refresh request when Authentication token missing', async () => {
     const reqData = {
       // eslint-disable-next-line
-      client_id: 'webapp', // eslint-disable-next-line
+      client_id: 'webapp',
       username,
       password,
     };

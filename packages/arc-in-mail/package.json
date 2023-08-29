@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
-    "node": "12 || 14 || 16 || 17"
+    "node": "16 || 18 || 20"
   },
   "scripts": {
     "build:layers": "scripts/build-dependency-layer.sh",
@@ -23,7 +23,7 @@
     "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
     "prettier:check": "npm run prettier:cli -- -l",
     "prettier:fix": "npm run prettier:cli -- --write",
-    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint": "eslint --report-unused-disable-directives .",
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run rebuild",
     "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",

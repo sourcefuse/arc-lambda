@@ -2,12 +2,9 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import dotenv from "dotenv";
-import {
-  ApplicationConfig,
-  WorkflowHelloworldApplication,
-} from "./application";
-export * from "./application";
+import dotenv from 'dotenv';
+import {ApplicationConfig, WorkflowHelloworldApplication} from './application';
+export * from './application';
 
 dotenv.config();
 const DEFAULT_PORT = 3000;
@@ -43,7 +40,7 @@ if (require.main === module) {
     },
   };
   main(config).catch(err => {
-    console.error("Cannot start the application.", err);// NOSONAR
+    console.error('Cannot start the application.', err); // NOSONAR
     process.exit(1);
   });
 }

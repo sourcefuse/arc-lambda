@@ -18,7 +18,10 @@ import {
   SFCoreBindings,
   ServiceSequence,
 } from '@sourceloop/core';
-import {VideoConfServiceComponent, VonageBindings} from '@sourceloop/video-conferencing-service';
+import {
+  VideoConfServiceComponent,
+  VonageBindings,
+} from '@sourceloop/video-conferencing-service';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
 import {AuthenticationComponent} from 'loopback4-authentication';
@@ -78,7 +81,6 @@ export class VideoConferencingApplication extends BootMixin(
     };
 
     this.bind(SFCoreBindings.config).to({configObject});
-
 
     // Set up the custom sequence
     this.sequence(ServiceSequence);

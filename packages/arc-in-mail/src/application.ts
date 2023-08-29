@@ -20,7 +20,6 @@ import {MySequence} from './sequence';
 
 export {ApplicationConfig};
 
-const port = 3000;
 export class InMailExampleApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
