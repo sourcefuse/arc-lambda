@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# This workflow contains a single job called "npm_audit"
+jobs:
+  npm_audit:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+      - run: node --version
+      - run: npm --version
+
+      - name: install-dependencies
+        run: npm ci
+
+      - name: lerna-build
+        uses: m19c/action-lerna@1.0.0
+        with:
+          args: "run build"
+
+      - name: lerna-lint
+        uses: m19c/action-lerna@1.0.0
+        with:
+          args: "run lint"

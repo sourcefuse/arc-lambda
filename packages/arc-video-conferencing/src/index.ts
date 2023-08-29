@@ -11,7 +11,7 @@ export async function main(options: ApplicationConfig = {}) {
 
   const url = app.restServer.url;
   console.log(`Server is running at ${url}`); //NOSONAR
-  console.log(`Try ${url}/ping`);//NOSONAR
+  console.log(`Try ${url}/ping`); //NOSONAR
 
   return app;
 }
@@ -35,7 +35,7 @@ if (require.main === module) {
     },
   };
   main(config).catch(err => {
-    console.error('Cannot start the application.', err);//NOSONAR
+    console.error('Cannot start the application.', err); //NOSONAR
     process.exit(1);
   });
 }

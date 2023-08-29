@@ -2,12 +2,12 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { inject, lifeCycleObserver, LifeCycleObserver } from "@loopback/core";
-import { juggler } from "@loopback/repository";
+import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
+import {juggler} from '@loopback/repository';
 
 const config = {
-  name: "AuthCache",
-  connector: "kv-memory",
+  name: 'AuthCache',
+  connector: 'kv-memory',
   // url: '',
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
@@ -19,17 +19,17 @@ const config = {
 // application is stopped. This allows the application to be shut down
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
-@lifeCycleObserver("datasource")
+@lifeCycleObserver('datasource')
 export class AuthCacheDataSource
   extends juggler.DataSource
   implements LifeCycleObserver
 {
-  static dataSourceName = "AuthCache";
+  static dataSourceName = 'AuthCache';
   static readonly defaultConfig = config;
 
   constructor(
-    @inject("datasources.config.AuthCache", { optional: true })
-    dsConfig: object = config
+    @inject('datasources.config.AuthCache', {optional: true})
+    dsConfig: object = config,
   ) {
     super(dsConfig);
   }

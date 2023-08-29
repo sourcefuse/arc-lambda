@@ -21,7 +21,7 @@ exports.setup = function (options, seedLink) {
 exports.up = function (db) {
   let filePath = path.join(__dirname, 'sqls', '20210501132806-init-up.sql');
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+    fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
       if (err) return reject(err);
       console.log('received data: ' + data);
 
@@ -35,7 +35,7 @@ exports.up = function (db) {
 exports.down = function (db) {
   let filePath = path.join(__dirname, 'sqls', '20210501132806-init-down.sql');
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
+    fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
       if (err) return reject(err);
       console.log('received data: ' + data);
 

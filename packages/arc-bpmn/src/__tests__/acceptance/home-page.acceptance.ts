@@ -2,35 +2,35 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { Client } from "@loopback/testlab";
-import { STATUS_CODE } from "@sourceloop/core";
-import { WorkflowHelloworldApplication } from "../..";
-import { setupApplication } from "./test-helper";
+import {Client} from '@loopback/testlab';
+import {STATUS_CODE} from '@sourceloop/core';
+import {WorkflowHelloworldApplication} from '../..';
+import {setupApplication} from './test-helper';
 
-describe("HomePage", () => {
+describe('HomePage', () => {
   let app: WorkflowHelloworldApplication;
   let client: Client;
 
-  before("setupApplication", async () => {
-    ({ app, client } = await setupApplication());
+  before('setupApplication', async () => {
+    ({app, client} = await setupApplication());
   });
 
   after(async () => {
     await app.stop();
   });
 
-  it("exposes a default home page", async () => {
+  it('exposes a default home page', async () => {
     await client
-      .get("/")
+      .get('/')
       .expect(STATUS_CODE.OK)
-      .expect("Content-Type", /text\/html/);
+      .expect('Content-Type', /text\/html/);
   });
 
-  it("exposes self-hosted explorer", async () => {
+  it('exposes self-hosted explorer', async () => {
     await client
-      .get("/explorer/")
+      .get('/explorer/')
       .expect(STATUS_CODE.OK)
-      .expect("Content-Type", /text\/html/)
+      .expect('Content-Type', /text\/html/)
       .expect(/<title>LoopBack API Explorer/);
   });
 });

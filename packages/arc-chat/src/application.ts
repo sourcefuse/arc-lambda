@@ -57,7 +57,6 @@ export class ChatApplication extends BootMixin(
 
     super(options);
 
-
     const configObject: CoreConfig['configObject'] = {
       locales: [
         LocaleKey.en,
@@ -79,7 +78,6 @@ export class ChatApplication extends BootMixin(
     };
 
     this.bind(SFCoreBindings.config).to({configObject});
-
 
     // Set up the custom sequence
     this.sequence(ServiceSequence);

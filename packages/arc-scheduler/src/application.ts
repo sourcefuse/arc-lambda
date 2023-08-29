@@ -2,41 +2,41 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { BootMixin } from "@loopback/boot";
-import { ApplicationConfig } from "@loopback/core";
-import { RepositoryMixin } from "@loopback/repository";
-import { RestApplication } from "@loopback/rest";
+import {BootMixin} from '@loopback/boot';
+import {ApplicationConfig} from '@loopback/core';
+import {RepositoryMixin} from '@loopback/repository';
+import {RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
-} from "@loopback/rest-explorer";
-import { ServiceMixin } from "@loopback/service-proxy";
-import { CoreConfig, LocaleKey, SFCoreBindings } from "@sourceloop/core";
-import { SchedulerServiceComponent } from "@sourceloop/scheduler-service";
-import * as dotenv from "dotenv";
-import * as dotenvExt from "dotenv-extended";
-import path from "path";
-import { MySequence } from "./sequence";
+} from '@loopback/rest-explorer';
+import {ServiceMixin} from '@loopback/service-proxy';
+import {CoreConfig, LocaleKey, SFCoreBindings} from '@sourceloop/core';
+import {SchedulerServiceComponent} from '@sourceloop/scheduler-service';
+import * as dotenv from 'dotenv';
+import * as dotenvExt from 'dotenv-extended';
+import path from 'path';
+import {MySequence} from './sequence';
 
-export { ApplicationConfig };
+export {ApplicationConfig};
 
 const port = 3000;
 export class SchedulerExampleApplication extends BootMixin(
-  ServiceMixin(RepositoryMixin(RestApplication))
+  ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   localeObj: i18nAPI = {} as i18nAPI;
 
   constructor(options: ApplicationConfig = {}) {
     dotenv.config();
-    if (process?.env?.NODE_ENV && process.env.NODE_ENV !== "test") {
+    if (process?.env?.NODE_ENV && process.env.NODE_ENV !== 'test') {
       dotenvExt.load({
-        schema: ".env.example",
+        schema: '.env.example',
         errorOnMissing: true,
         includeProcessEnv: true,
       });
     } else {
       dotenvExt.load({
-        schema: ".env.example",
+        schema: '.env.example',
         errorOnMissing: false,
         includeProcessEnv: true,
       });
@@ -46,7 +46,7 @@ export class SchedulerExampleApplication extends BootMixin(
     options.rest.host = process.env.HOST;
     super(options);
 
-    const configObject: CoreConfig["configObject"] = {
+    const configObject: CoreConfig['configObject'] = {
       locales: [
         LocaleKey.en,
         LocaleKey.es,
@@ -55,28 +55,28 @@ export class SchedulerExampleApplication extends BootMixin(
         LocaleKey.esCo,
       ],
       fallbacks: {
-        [LocaleKey.es]: "en",
-        [LocaleKey.esCo]: "en",
-        [LocaleKey.ptBr]: "en",
-        [LocaleKey.ptPt]: "en",
+        [LocaleKey.es]: 'en',
+        [LocaleKey.esCo]: 'en',
+        [LocaleKey.ptBr]: 'en',
+        [LocaleKey.ptPt]: 'en',
       },
       register: this.localeObj,
-      directoryPermissions: "777",
+      directoryPermissions: '777',
       directory: `/tmp`,
       objectNotation: true,
     };
 
-    this.bind(SFCoreBindings.config).to({ configObject });
+    this.bind(SFCoreBindings.config).to({configObject});
 
     // Set up the custom sequence
     this.sequence(MySequence);
 
     // Set up default home page
-    this.static("/", path.join(__dirname, "../public"));
+    this.static('/', path.join(__dirname, '../public'));
 
     // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
-      path: "/explorer",
+      path: '/explorer',
     });
     this.component(RestExplorerComponent);
     this.component(SchedulerServiceComponent);
@@ -86,8 +86,8 @@ export class SchedulerExampleApplication extends BootMixin(
     this.bootOptions = {
       controllers: {
         // Customize ControllerBooter Conventions here
-        dirs: ["controllers"],
-        extensions: [".controller.js"],
+        dirs: ['controllers'],
+        extensions: ['.controller.js'],
         nested: true,
       },
     };

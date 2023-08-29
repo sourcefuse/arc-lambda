@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 let dbm;
 let type;
 let seed;
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 let prom;
 
 /**
@@ -21,13 +21,13 @@ exports.setup = function (options, seedLink) {
 exports.up = function (db) {
   const filePath = path.join(
     __dirname,
-    "sqls",
-    "20200622050609-event-attendee-view-up.sql"
+    'sqls',
+    '20200622050609-event-attendee-view-up.sql',
   );
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: "utf-8" }, function (err, data) {
+    fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
       if (err) return reject(err);
-      console.log("received data: " + data); // NOSONAR
+      console.log('received data: ' + data); // NOSONAR
 
       resolve(data);
     });
@@ -39,13 +39,13 @@ exports.up = function (db) {
 exports.down = function (db) {
   const filePath = path.join(
     __dirname,
-    "sqls",
-    "20200622050609-event-attendee-view-down.sql"
+    'sqls',
+    '20200622050609-event-attendee-view-down.sql',
   );
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: "utf-8" }, function (err, data) {
+    fs.readFile(filePath, {encoding: 'utf-8'}, function (err, data) {
       if (err) return reject(err);
-      console.log("received data: " + data); // NOSONAR
+      console.log('received data: ' + data); // NOSONAR
 
       resolve(data);
     });

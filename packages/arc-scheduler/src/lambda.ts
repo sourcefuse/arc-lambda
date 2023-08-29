@@ -1,8 +1,9 @@
-import { APIGatewayEvent, APIGatewayProxyEvent, Context } from "aws-lambda";
-import { SchedulerExampleApplication } from "./application";
-const serverlessExpress = require("@vendia/serverless-express");
+import {APIGatewayEvent, APIGatewayProxyEvent, Context} from 'aws-lambda';
+import {SchedulerExampleApplication} from './application';
+const serverlessExpress = require('@vendia/serverless-express');
 
-export * from "./application";
+export * from './application';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let serverlessApp: (arg0: APIGatewayProxyEvent, arg1: Context) => any; // NOSONAR
 
 export async function setup(event: APIGatewayEvent, context: Context) {
@@ -16,7 +17,7 @@ export async function setup(event: APIGatewayEvent, context: Context) {
   const app = new SchedulerExampleApplication(config);
   await app.boot();
   const requestHandler = app.restServer.requestHandler;
-  serverlessApp = serverlessExpress({ app: requestHandler });
+  serverlessApp = serverlessExpress({app: requestHandler});
   return serverlessApp(event, context);
 }
 

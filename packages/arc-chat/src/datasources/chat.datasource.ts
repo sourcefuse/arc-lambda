@@ -1,8 +1,5 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
-const DEFAULT_MAX_CONNECTIONS = 25;
-const DEFAULT_DB_IDLE_TIMEOUT_MILLIS = 60000;
-const DEFAULT_DB_CONNECTION_TIMEOUT_MILLIS = 2000;
 
 const config = {
   name: 'chatDb',

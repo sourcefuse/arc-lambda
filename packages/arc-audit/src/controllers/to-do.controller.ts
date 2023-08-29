@@ -9,7 +9,7 @@ import {
   FilterExcludingWhere,
   repository,
   Where,
-} from "@loopback/repository";
+} from '@loopback/repository';
 import {
   del,
   get,
@@ -19,28 +19,28 @@ import {
   post,
   put,
   requestBody,
-} from "@loopback/rest";
-import { CONTENT_TYPE, STATUS_CODE } from "@sourceloop/core";
-import { authenticate, STRATEGY } from "loopback4-authentication";
-import { authorize } from "loopback4-authorization";
-import { PermissionKey } from "../enums/permissions.enum";
-import { ToDo } from "../models";
-import { ToDoRepository } from "../repositories";
+} from '@loopback/rest';
+import {CONTENT_TYPE, STATUS_CODE} from '@sourceloop/core';
+import {authenticate, STRATEGY} from 'loopback4-authentication';
+import {authorize} from 'loopback4-authorization';
+import {PermissionKey} from '../enums/permissions.enum';
+import {ToDo} from '../models';
+import {ToDoRepository} from '../repositories';
 
-const BASE = "/to-dos";
+const BASE = '/to-dos';
 export class ToDoController {
   constructor(
     @repository(ToDoRepository)
-    public toDoRepository: ToDoRepository
+    public toDoRepository: ToDoRepository,
   ) {}
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: [PermissionKey.CreateTodo] })
+  @authorize({permissions: [PermissionKey.CreateTodo]})
   @post(BASE, {
     responses: {
       [STATUS_CODE.OK]: {
-        description: "ToDo model instance",
-        content: { [CONTENT_TYPE.JSON]: { schema: getModelSchemaRef(ToDo) } },
+        description: 'ToDo model instance',
+        content: {[CONTENT_TYPE.JSON]: {schema: getModelSchemaRef(ToDo)}},
       },
     },
   })
@@ -49,24 +49,24 @@ export class ToDoController {
       content: {
         [CONTENT_TYPE.JSON]: {
           schema: getModelSchemaRef(ToDo, {
-            title: "NewToDo",
-            exclude: ["id"],
+            title: 'NewToDo',
+            exclude: ['id'],
           }),
         },
       },
     })
-    toDo: Omit<ToDo, "id">
+    toDo: Omit<ToDo, 'id'>,
   ): Promise<ToDo> {
     return this.toDoRepository.create(toDo);
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: ["*"] })
+  @authorize({permissions: ['*']})
   @get(`${BASE}/count`, {
     responses: {
       [STATUS_CODE.OK]: {
-        description: "ToDo model count",
-        content: { [CONTENT_TYPE.JSON]: { schema: CountSchema } },
+        description: 'ToDo model count',
+        content: {[CONTENT_TYPE.JSON]: {schema: CountSchema}},
       },
     },
   })
@@ -75,16 +75,16 @@ export class ToDoController {
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: ["*"] })
+  @authorize({permissions: ['*']})
   @get(BASE, {
     responses: {
       [STATUS_CODE.OK]: {
-        description: "Array of ToDo model instances",
+        description: 'Array of ToDo model instances',
         content: {
           [CONTENT_TYPE.JSON]: {
             schema: {
-              type: "array",
-              items: getModelSchemaRef(ToDo, { includeRelations: true }),
+              type: 'array',
+              items: getModelSchemaRef(ToDo, {includeRelations: true}),
             },
           },
         },
@@ -96,12 +96,12 @@ export class ToDoController {
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: [PermissionKey.UpdateTodo] })
+  @authorize({permissions: [PermissionKey.UpdateTodo]})
   @patch(BASE, {
     responses: {
       [STATUS_CODE.OK]: {
-        description: "ToDo PATCH success count",
-        content: { [CONTENT_TYPE.JSON]: { schema: CountSchema } },
+        description: 'ToDo PATCH success count',
+        content: {[CONTENT_TYPE.JSON]: {schema: CountSchema}},
       },
     },
   })
@@ -109,87 +109,87 @@ export class ToDoController {
     @requestBody({
       content: {
         [CONTENT_TYPE.JSON]: {
-          schema: getModelSchemaRef(ToDo, { partial: true }),
+          schema: getModelSchemaRef(ToDo, {partial: true}),
         },
       },
     })
     toDo: ToDo,
-    @param.where(ToDo) where?: Where<ToDo>
+    @param.where(ToDo) where?: Where<ToDo>,
   ): Promise<Count> {
     return this.toDoRepository.updateAll(toDo, where);
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: ["*"] })
+  @authorize({permissions: ['*']})
   @get(`${BASE}/{id}`, {
     responses: {
       [STATUS_CODE.OK]: {
-        description: "ToDo model instance",
+        description: 'ToDo model instance',
         content: {
           [CONTENT_TYPE.JSON]: {
-            schema: getModelSchemaRef(ToDo, { includeRelations: true }),
+            schema: getModelSchemaRef(ToDo, {includeRelations: true}),
           },
         },
       },
     },
   })
   async findById(
-    @param.path.string("id") id: string,
-    @param.filter(ToDo, { exclude: "where" })
-    filter?: FilterExcludingWhere<ToDo>
+    @param.path.string('id') id: string,
+    @param.filter(ToDo, {exclude: 'where'})
+    filter?: FilterExcludingWhere<ToDo>,
   ): Promise<ToDo> {
     return this.toDoRepository.findById(id, filter);
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: [PermissionKey.UpdateTodo] })
+  @authorize({permissions: [PermissionKey.UpdateTodo]})
   @patch(`${BASE}/{id}`, {
     responses: {
       [STATUS_CODE.NO_CONTENT]: {
-        description: "ToDo PATCH success",
+        description: 'ToDo PATCH success',
       },
     },
   })
   async updateById(
-    @param.path.string("id") id: string,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         [CONTENT_TYPE.JSON]: {
-          schema: getModelSchemaRef(ToDo, { partial: true }),
+          schema: getModelSchemaRef(ToDo, {partial: true}),
         },
       },
     })
-    toDo: ToDo
+    toDo: ToDo,
   ): Promise<void> {
     await this.toDoRepository.updateById(id, toDo);
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: [PermissionKey.UpdateTodo] })
+  @authorize({permissions: [PermissionKey.UpdateTodo]})
   @put(`${BASE}/{id}`, {
     responses: {
       [STATUS_CODE.NO_CONTENT]: {
-        description: "ToDo PUT success",
+        description: 'ToDo PUT success',
       },
     },
   })
   async replaceById(
-    @param.path.string("id") id: string,
-    @requestBody() toDo: ToDo
+    @param.path.string('id') id: string,
+    @requestBody() toDo: ToDo,
   ): Promise<void> {
     await this.toDoRepository.replaceById(id, toDo);
   }
 
   @authenticate(STRATEGY.BEARER)
-  @authorize({ permissions: [PermissionKey.DeleteTodo] })
+  @authorize({permissions: [PermissionKey.DeleteTodo]})
   @del(`${BASE}/{id}`, {
     responses: {
       [STATUS_CODE.NO_CONTENT]: {
-        description: "ToDo DELETE success",
+        description: 'ToDo DELETE success',
       },
     },
   })
-  async deleteById(@param.path.string("id") id: string): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.toDoRepository.deleteById(id);
   }
 }

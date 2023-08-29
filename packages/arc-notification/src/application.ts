@@ -35,7 +35,6 @@ export {ApplicationConfig};
 export class NotificationApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
-
   localeObj: i18nAPI = {} as i18nAPI;
 
   constructor(options: ApplicationConfig = {}) {
@@ -95,7 +94,7 @@ export class NotificationApplication extends BootMixin(
       subscribeKey: process.env.PUBNUB_SUBSCRIBE_KEY,
       publishKey: process.env.PUBNUB_PUBLISH_KEY,
       secretKey: process.env.PUBNUB_SECRET_KEY,
-      uuid: 'ea24d84f-ef69-403c-b6c4-7758ea9c2093',//while interacting with pubnub infrastructure when its object is initialised.
+      uuid: 'ea24d84f-ef69-403c-b6c4-7758ea9c2093', //while interacting with pubnub infrastructure when its object is initialised.
     });
     // Add bearer verifier component
     this.bind(BearerVerifierBindings.Config).to({
