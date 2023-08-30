@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx --no-install commitlint --edit 
+#refer: https://github.com/conventional-changelog/commitlint/issues/902
+npx commitlint --config commitlint.config.cjs --edit $1
