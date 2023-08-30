@@ -9,7 +9,7 @@
     "get": "cdktf get",
     "deploy": "cdktf deploy",
     "destroy": "cdktf destroy",
-    "build": "tsc",
+    "build": "npx cdktf get && tsc",
     "synth": "cdktf synth",
     "compile": "tsc --pretty",
     "watch": "tsc -w",
