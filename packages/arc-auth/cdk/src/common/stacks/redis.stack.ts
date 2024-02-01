@@ -2,6 +2,7 @@ import * as aws from '@cdktf/provider-aws';
 import {Fn, TerraformIterator, TerraformStack} from 'cdktf';
 import {Construct} from 'constructs';
 import {Redis} from '../../.gen/modules/redis';
+import {getEnv} from '../../env';
 import {AwsProvider} from '../constructs/awsProvider';
 import {getResourceName} from '../utils/helper';
 
@@ -11,10 +12,16 @@ type Config = {
 };
 
 export class RedisStack extends TerraformStack {
-  constructor(scope: Construct, id: string, config: Config) {
+  constructor(scope: Construct, id: string) {
     super(scope, id);
 
     new AwsProvider(this, 'aws'); // NOSONAR
+    const env = getEnv(this);
+    const config: Config = {
+      // NOSONAR
+      namespace: env.NAMESPACE || '',
+      environment: env.ENV || '',
+    }
 
     const name = getResourceName({
       namespace: config.namespace,
@@ -57,8 +64,8 @@ export class RedisStack extends TerraformStack {
           {
             name: 'tag:Name',
             values: [
-              `${config.namespace}-${config.environment}-privatesubnet-private-${process.env.AWS_REGION}a`,
-              `${config.namespace}-${config.environment}-privatesubnet-private-${process.env.AWS_REGION}b`,
+              `${config.namespace}-${config.environment}-privatesubnet-private-${env.AWS_REGION}a`,
+              `${config.namespace}-${config.environment}-privatesubnet-private-${env.AWS_REGION}b`,
             ],
           },
           {
