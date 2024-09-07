@@ -29,7 +29,7 @@
     "constructs": "^10.2.69",
     "dotenv": "^16.3.1",
     "dotenv-extended": "^2.9.0",
-    "arc-cdk": "^0.0.8"
+    "arc-cdk": "^0.0.19"
   },
   "devDependencies": {
     "@types/jest": "^29.5.4",
