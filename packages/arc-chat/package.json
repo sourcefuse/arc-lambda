@@ -65,7 +65,7 @@
     "@loopback/boot": "^6.1.2",
     "@loopback/core": "^5.1.2",
     "@loopback/repository": "^6.1.2",
-    "@loopback/rest": "^13.1.2",
+    "@loopback/rest": "^14.0.6",
     "@loopback/rest-explorer": "^6.1.2",
     "@loopback/service-proxy": "^6.1.2",
     "@loopback/openapi-v3": "^9.1.2",
