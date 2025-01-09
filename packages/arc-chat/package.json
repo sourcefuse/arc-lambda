@@ -70,7 +70,7 @@
     "@loopback/service-proxy": "^6.1.2",
     "@loopback/openapi-v3": "^9.1.2",
     "@loopback/context": "^6.1.2",
-    "@sourceloop/core": "^8.0.5",
+    "@sourceloop/core": "^15.0.2",
     "loopback4-authentication": "^9.0.2",
     "loopback4-authorization": "^6.1.0",
     "swagger-stats": "^0.99.7",
@@ -80,7 +80,7 @@
     "dotenv-extended": "^2.9.0",
     "loopback-connector-postgresql": "^6.0.7",
     "tslib": "^2.6.2",
-    "@sourceloop/chat-service": "^5.0.6"
+    "@sourceloop/chat-service": "^13.0.2"
   },
   "devDependencies": {
     "@loopback/build": "^10.1.2",
